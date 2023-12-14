@@ -1,0 +1,41 @@
+{
+  "app": {
+    "save": "Save",
+    "procced": "Next"
+  },
+  "error": {
+    "id_is_required": "ID is required",
+    "id_is_not_valid": "ID is not valid",
+    "phone_is_required": "Phone is required",
+    "phone_is_not_valid": "Phone is not valid",
+    "password_is_required": "Password is required"
+  },
+  "login": {
+    "login": "Login",
+    "enter_private_area": "Entering your personal area",
+    "new_costumer": "New costumer?",
+    "register_here": "Register here",
+    "forgot_password": "Forgot password",
+    "one_time_code_login": "Sign in with a single-use code",
+    "tap_here": "Tap here",
+    "id": "Your ID",
+    "id_placeholder": "Enter your ID",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "remember_me": "Remember me"
+  },
+  "verification_code": {
+    "verification_code_subtitle": "A text message with a four- digit verification code has been sent to your phone number",
+    "verification_title": "SMS Verification",
+    "procced": "Login",
+    "sms_verification": "SMS verification",
+    "enter_code_to_proceed": "A text message with a 4 digit verification code has been sent to your phone number",
+    "the_code_is_in_the_way": "code is on the way",
+    "code_is_wrong": "The code is incorrect, please try again",
+    "secondes": "secondes",
+    "did_not_recieve_code": "Didn’t receive the code?",
+    "click_here_to_resend": "Resend",
+    "instractions": "The message “Click here to resend“ will appear Instead of “the code is on the way“ after the 30 are over seconds.",
+    "note": "The message “Click here to resend“ will appear instead of “the code is on the way“ after the 30 are over seconds."
+  }
+}

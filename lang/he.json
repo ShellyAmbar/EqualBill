@@ -1,0 +1,67 @@
+{
+  "app": {
+    "save": "שמור",
+    "procced": "המשך"
+  },
+  "error": {
+    "id_is_required": "חובה למלא תעודת זהות",
+    "id_is_not_valid": "תעודת זהות לא תקינה",
+    "phone_is_required": "חובה למלא מספר טלפון",
+    "phone_is_not_valid": "מספר טלפון לא תקין",
+    "password_is_required": "חובה למלא סיסמה"
+  },
+  "login": {
+    "login": "התחבר",
+    "enter_private_area": "כניסה לאיזור אישי",
+    "new_costumer": "לקוח חדש?",
+    "register_here": "הירשם כאן",
+    "forgot_password": "שכחתי סיסמה",
+    "one_time_code_login": "כניסה עם קוד חד-פעמי",
+    "tap_here": "לחץ כאן",
+    "id": "תעודת זהות",
+    "id_placeholder": "הזן את תעודן הזהות שלך",
+    "password": "סיסמה",
+    "password_placeholder": "הזן סיסמא",
+    "remember_me": "זכור אותי"
+  },
+  "registration_screen": {
+    "create_an_account": "בוא נתחיל ברישום שלך",
+    "reset_password": "איפוס סיסמה",
+    "id": "תעודת זהות",
+    "id_placeholder": "הזן את תעודן הזהות שלך",
+    "phone": "מספר טלפון",
+    "phone_placeholder": "הזן את מספר הטלפון שלך",
+    "remember_me": "זכור אותי",
+    "existing_costumer": "לקוח קיים?",
+    "login_here": "התחבר כאן",
+    "next": "המשך"
+  },
+  "choose_password_screen": {
+    "reset_password": "איפוס סיסמה",
+    "choose_password": "בחר סיסמה",
+    "password_title1": "בחר סיסמה",
+    "password_field1_placeholder": "הזן סיסמה",
+    "password_title2": "אמת את סיסמתך",
+    "password_field2_placeholder": "הזן סיסמה",
+    "your_password_must_include": "סיסמתך חייבת לכלול",
+    "at_least_8_characters": "לפחות 8 תווים",
+    "English_letters_upper_lower_case": "אותיות באנגלית קטנות וגדולות",
+    "at_least_1_digit": "לפחות ספרה אחת",
+    "passwords_do_not_match": "הסיסמהות אינן תואמות, אנא נסה שנית",
+    "next": "המשך"
+  },
+  "verification_code": {
+    "sms_verification": "קוד אימות נשלח לנייד שלך",
+    "enter_code_to_proceed": "להמשך הרשמה אנא הזינו את הקוד",
+    "the_code_is_in_the_way": "הקוד בדרך",
+    "code_is_wrong": "הקוד לא תקין אנא נסה שנית",
+    "secondes": "שניות",
+    "did_not_recieve_code": "לא קיבלת את הקוד?",
+    "click_here_to_resend": "לחץ כאן לשליחה חוזרת",
+    "instractions": "ההודעה “לחץ כאן לשליחה חוזרת תופיע במקום “הקוד בדרך” לאחר שהסתיימו ה 30 שניות.",
+    "note": "ההודעה “לחץ כאן לשליחה חוזרת תופיע במקום “הקוד בדרך” לאחר שהסתיימו ה 30 שניות.",
+    "verification_code_subtitle": "להמשך הרשמה אנא הזינו את הקוד",
+    "verification_title": "קוד אימות נשלח לנייד שלך",
+    "procced": "המשך"
+  }
+}
