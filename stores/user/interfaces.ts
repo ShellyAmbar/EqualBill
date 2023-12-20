@@ -1,4 +1,5 @@
 type Expense = {
+  id: string;
   amount: string;
   name: string;
   user_id: string;

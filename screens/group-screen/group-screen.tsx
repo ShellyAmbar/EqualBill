@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native';
+import { Image } from 'react-native';
 import React from 'react';
 import styles from './group-screen.styles';
 
@@ -12,19 +12,34 @@ import ActionsFloatingButton from 'rn-actions-floating-button';
 import useGroupScreen from './hooks/useGroupScreen';
 import Popup from 'rn-sliding-popup';
 import { VisiblePopup } from './hooks/interfaces';
-import SelectContactsView from './select-contacts-view/select-contacts-view';
-
 import HorizontalUsersSlider from '@equalbill/components/horizontal-users-slider/horizontal-users-slider';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import { LinearGradient } from 'expo-linear-gradient';
+import ExpensesList from './expenses-list/expenses-list';
+import ExpenseForm from './expense-form/expense-form';
+import { Group } from '@equalbill/stores/user/interfaces';
 
-const GroupScreen = props => {
+const GroupScreen = ({ route, navigation }) => {
+  const { group }: { group: Group } = route.params;
+
   const onclickBack = () => {
-    props.navigation.goBack();
+    navigation.goBack();
   };
 
-  const { currentVisiblePopup, setCurrentVisiblePopup, groupUsers, setGroupUsers, selectedUser, setSelectedUser } = useGroupScreen();
+  const {
+    currentVisiblePopup,
+    setCurrentVisiblePopup,
+    groupUsers,
+    selectedUser,
+    setSelectedUser,
+    expenses,
+    setExpenseToEdit,
+    expenseToEdit,
+    updateExpense,
+    deleteExpense,
+    addExpense,
+  } = useGroupScreen({ groupItem: group });
 
   return (
     <Box style={styles.container}>
@@ -33,13 +48,38 @@ const GroupScreen = props => {
           setCurrentVisiblePopup(VisiblePopup.NONE);
         }}
         isVisible={currentVisiblePopup === VisiblePopup.ADD_EXPENSE}
-      ></Popup>
+      >
+        <ExpenseForm
+          titleText="Create Expense"
+          buttonText="Add"
+          onConfirm={expense => {
+            addExpense(expense);
+            setCurrentVisiblePopup(VisiblePopup.NONE);
+          }}
+        />
+      </Popup>
       <Popup
         onClickClose={() => {
           setCurrentVisiblePopup(VisiblePopup.NONE);
         }}
         isVisible={currentVisiblePopup === VisiblePopup.EDIT_GROUP}
       ></Popup>
+      <Popup
+        onClickClose={() => {
+          setCurrentVisiblePopup(VisiblePopup.NONE);
+        }}
+        isVisible={currentVisiblePopup === VisiblePopup.EDIT_EXPENSE}
+      >
+        <ExpenseForm
+          titleText="Edit Expense"
+          buttonText="Update"
+          onConfirm={expense => {
+            updateExpense(expense);
+            setCurrentVisiblePopup(VisiblePopup.NONE);
+          }}
+          expense={expenseToEdit}
+        />
+      </Popup>
 
       <CollapsingScroll
         scrollProps={{ contentContainerStyle: { paddingBottom: 16 } }}
@@ -56,7 +96,9 @@ const GroupScreen = props => {
             <Image
               style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 0 }}
               source={{
-                uri: 'https://www.treehugger.com/thmb/IAlZGVzhRLGZL_E0zSv7qbzyGRA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1273584292-cbcd5f85f4c646d58f7a7fa158dcaaeb.jpg',
+                uri: group?.url
+                  ? group.url
+                  : 'https://www.treehugger.com/thmb/IAlZGVzhRLGZL_E0zSv7qbzyGRA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1273584292-cbcd5f85f4c646d58f7a7fa158dcaaeb.jpg',
               }}
             />
             <LinearGradient
@@ -70,14 +112,30 @@ const GroupScreen = props => {
         image={() => (
           <Box style={{ width: '100%', height: '100%' }}>
             <TextFactory style={styles.title} type="h2">
-              {'Name '}
+              {group?.name ?? ''}
             </TextFactory>
           </Box>
         )}
       >
         <Box style={styles.container}>
           <Spacer size={16} />
-          <HorizontalUsersSlider data={groupUsers} onPressItem={() => {}} />
+          <HorizontalUsersSlider
+            data={groupUsers}
+            onPressItem={item => {
+              setSelectedUser(item);
+            }}
+          />
+          <Spacer size={16} />
+          <ExpensesList
+            data={expenses}
+            onDeleteExpense={expense => {
+              deleteExpense(expense);
+            }}
+            onEditExpense={expense => {
+              setExpenseToEdit(expense);
+              setCurrentVisiblePopup(VisiblePopup.EDIT_EXPENSE);
+            }}
+          />
         </Box>
       </CollapsingScroll>
       <ActionsFloatingButton

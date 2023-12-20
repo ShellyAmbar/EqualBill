@@ -2,39 +2,36 @@ import { GlobalColors } from '@equalbill/styles/global-colors';
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
+    width: '100%',
+  },
+  content: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    width: '100%',
   },
-  image: {
-    zIndex: 0,
-    width: 60,
-    height: 60,
-    borderRadius: 100,
-    borderColor: GlobalColors.Border,
-    borderWidth: 1,
-  },
-  cancelableImage: {
-    zIndex: 0,
-    width: 60,
-    height: 60,
-  },
-  text: {
+  title: {
     color: GlobalColors.Brand.primary,
+    alignSelf: 'center',
   },
-  close: {
+  subtitle: {
+    color: GlobalColors.Brand.primary,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  textInput: {
+    paddingVertical: 5,
+  },
+  button: {
+    width: '70%',
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    top: -5,
-    left: -5,
-    width: 24,
-    height: 24,
-    zIndex: 10,
-    borderColor: GlobalColors.Border,
     borderWidth: 1,
     borderRadius: 30,
-    backgroundColor: GlobalColors.BgColors.Bg1,
+    borderColor: GlobalColors.Brand.primary,
+    alignSelf: 'center',
   },
 });
 

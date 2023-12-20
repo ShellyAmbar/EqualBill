@@ -1,11 +1,13 @@
+import { GlobalColors } from '@equalbill/styles/global-colors';
 import { StyleSheet } from 'react-native';
-import colors from '../../../styles/Colors';
 
 export default StyleSheet.create({
   button: {
-    borderWidth: 0,
-    backgroundColor: colors['color-basic-400'],
+    borderWidth: 1,
+    backgroundColor: GlobalColors.BgColors.Bg3,
     borderRadius: 16,
+    width: '100%',
+    paddingVertical: 12,
   },
   text: {
     color: 'black',

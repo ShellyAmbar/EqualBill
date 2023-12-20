@@ -4,9 +4,9 @@ import ButtonProps from './interfaces';
 import Styles from './button.styles';
 import { Box } from '../box/box';
 
-const Button = ({ label, lableStyle, ...props }: ButtonProps) => {
+const Button = ({ label, lableStyle, onPress, ...props }: ButtonProps) => {
   return (
-    <Box style={[Styles.button, props.style]} {...props}>
+    <Box onPress={onPress} style={{ ...Styles.button, ...{ ...props.style } }} {...props}>
       <Text style={{ ...Styles.text, ...lableStyle }}>{label}</Text>
     </Box>
   );

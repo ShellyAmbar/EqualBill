@@ -28,7 +28,7 @@ const Item = ({ item, onPress, onPressDelete }: ItemProps) => {
       </Box>
 
       <TextFactory type="h5" style={Styles.text}>
-        {item.name}
+        {`${item.name.length > 15 ? item.name.slice(0, 15) + '..' : item.name}`}
       </TextFactory>
     </Box>
   );

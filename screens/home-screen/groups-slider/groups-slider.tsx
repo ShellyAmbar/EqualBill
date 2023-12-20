@@ -18,7 +18,7 @@ const GroupsSlider = ({ data, style }: GroupsSliderProps) => {
 
     flatlistRef.current?.scrollToIndex({ index: indexToScroll, animated: true });
     navigation.navigate('Group', {
-      group,
+      group: group,
     });
   };
   return (
