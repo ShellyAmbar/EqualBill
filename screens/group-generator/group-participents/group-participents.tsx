@@ -11,8 +11,8 @@ import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import HorizontalUsersSlider from '@equalbill/components/horizontal-users-slider/horizontal-users-slider';
 import { User } from '@equalbill/stores/user/interfaces';
 import GroupParticipentsProps from './interfaces';
-const GroupParticipents = forwardRef(({ groupSelectedContacts, onGroupSelectedContactsChanged }: GroupParticipentsProps, ref) => {
-  const { contacts, setSelectedContacts, selectedContacts, filteredContacts, setFilteredContacts } = useGroupParticipants({ groupSelectedContacts });
+const GroupParticipents = forwardRef(({ participents, onParticipentsChanged }: GroupParticipentsProps, ref) => {
+  const { contacts, setSelectedContacts, selectedContacts, filteredContacts, setFilteredContacts } = useGroupParticipants({ participents });
 
   useImperativeHandle(ref, () => ({
     getParticipents() {
@@ -26,7 +26,7 @@ const GroupParticipents = forwardRef(({ groupSelectedContacts, onGroupSelectedCo
     if (isAdd) {
       if (!selectedContacts?.find(item => item.id === contact.id)) {
         setSelectedContacts(selected => {
-          onGroupSelectedContactsChanged && onGroupSelectedContactsChanged([...selected, contact]);
+          onParticipentsChanged && onParticipentsChanged([...selected, contact]);
           return [...selected, contact];
         });
       }
@@ -34,7 +34,7 @@ const GroupParticipents = forwardRef(({ groupSelectedContacts, onGroupSelectedCo
       if (selectedContacts?.find(item => item.id === contact.id)) {
         setSelectedContacts(selected => {
           const filteredList = selected.filter(item => item.id !== contact.id);
-          onGroupSelectedContactsChanged && onGroupSelectedContactsChanged([...filteredList]);
+          onParticipentsChanged && onParticipentsChanged([...filteredList]);
           return [...filteredList];
         });
       }

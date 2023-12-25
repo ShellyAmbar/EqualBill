@@ -1,6 +1,6 @@
 import { User } from '@equalbill/stores/user/interfaces';
 
 type UseGroupParticipentsProps = {
-  groupSelectedContacts?: User[];
+  participents?: User[];
 };
 export default UseGroupParticipentsProps;

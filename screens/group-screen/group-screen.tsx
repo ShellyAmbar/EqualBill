@@ -21,7 +21,7 @@ import ExpenseForm from './expense-form/expense-form';
 import { Group } from '@equalbill/stores/user/interfaces';
 
 const GroupScreen = ({ route, navigation }) => {
-  const { group }: { group: Group } = route.params;
+  const { group: groupFromProps }: { group: Group } = route.params;
 
   const onclickBack = () => {
     navigation.goBack();
@@ -30,8 +30,6 @@ const GroupScreen = ({ route, navigation }) => {
   const {
     currentVisiblePopup,
     setCurrentVisiblePopup,
-    groupUsers,
-    selectedUser,
     setSelectedUser,
     expenses,
     setExpenseToEdit,
@@ -39,7 +37,9 @@ const GroupScreen = ({ route, navigation }) => {
     updateExpense,
     deleteExpense,
     addExpense,
-  } = useGroupScreen({ groupItem: group });
+    group,
+    setGroup,
+  } = useGroupScreen({ groupItem: groupFromProps });
 
   return (
     <Box style={styles.container}>
@@ -58,12 +58,7 @@ const GroupScreen = ({ route, navigation }) => {
           }}
         />
       </Popup>
-      <Popup
-        onClickClose={() => {
-          setCurrentVisiblePopup(VisiblePopup.NONE);
-        }}
-        isVisible={currentVisiblePopup === VisiblePopup.EDIT_GROUP}
-      ></Popup>
+
       <Popup
         onClickClose={() => {
           setCurrentVisiblePopup(VisiblePopup.NONE);
@@ -119,12 +114,19 @@ const GroupScreen = ({ route, navigation }) => {
       >
         <Box style={styles.container}>
           <Spacer size={16} />
+          <TextFactory type="h4" style={styles.subTitle}>
+            {'Participents: '}
+          </TextFactory>
           <HorizontalUsersSlider
-            data={groupUsers}
+            data={group.users}
             onPressItem={item => {
               setSelectedUser(item);
             }}
           />
+          <Spacer size={16} />
+          <TextFactory type="h4" style={styles.subTitle}>
+            {'Expenses: '}
+          </TextFactory>
           <Spacer size={16} />
           <ExpensesList
             data={expenses}
@@ -145,7 +147,12 @@ const GroupScreen = ({ route, navigation }) => {
             id: 0,
             icon: () => <MaterialIcons name="create" size={30} color="#FFFF" />,
             onClick: () => {
-              setCurrentVisiblePopup(VisiblePopup.EDIT_GROUP);
+              navigation.navigate('GroupGenerator', {
+                groupToUpdate: group,
+                onUpdate: (groupToUpdate: Group) => {
+                  setGroup(groupToUpdate);
+                },
+              });
             },
           },
           {

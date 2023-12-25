@@ -1,9 +1,9 @@
-//import {  makeAutoObservable,  } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 class AuthStore {
   public rememberMe: boolean = false;
   constructor() {
-    //   makeAutoObservable(this);
+    makeAutoObservable(this);
   }
 
   setRememberMe(rememberMe: boolean) {

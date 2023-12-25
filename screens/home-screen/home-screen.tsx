@@ -12,9 +12,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Right from '@equalbill/assets/images/direction-right-white.svg';
 import Splash from 'rn-splash-effect';
 import { width } from '@equalbill/styles/styles';
-
-const HomeScreen = props => {
-  const { userGroups } = useHomeScreen();
+import UserStore from '@equalbill/stores/user/user-store';
+import { observer } from 'mobx-react';
+const HomeScreen = observer(props => {
+  const {} = useHomeScreen();
 
   return (
     <Box style={Styles.container}>
@@ -49,18 +50,20 @@ const HomeScreen = props => {
       <Box style={styles.bottom}>
         <Box style={styles.horizontal_spaced}>
           <TextFactory type="h2">{'Your groups'}</TextFactory>
-          <Box style={[styles.button_all, styles.shadow]} onPress={() => {}}>
-            <TextFactory style={styles.button_all_text} type="h5">
-              {'See all'}
-            </TextFactory>
-          </Box>
+          {UserStore.userGroups?.length > 0 && (
+            <Box style={[styles.button_all, styles.shadow]} onPress={() => {}}>
+              <TextFactory style={styles.button_all_text} type="h5">
+                {'See all'}
+              </TextFactory>
+            </Box>
+          )}
         </Box>
         <Spacer size={16} />
 
-        <GroupsSlider data={userGroups} />
+        <GroupsSlider data={UserStore.userGroups} />
       </Box>
     </Box>
   );
-};
+});
 
 export default HomeScreen;

@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     position: 'absolute',
-    bottom: 30,
+    bottom: 0,
+    paddingBottom: 30,
+    backgroundColor: GlobalColors.BgColors.Bg1,
   },
   horizontal: {
     flexDirection: 'row',

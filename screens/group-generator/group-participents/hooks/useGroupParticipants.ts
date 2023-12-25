@@ -4,9 +4,9 @@ import * as Contacts from 'expo-contacts';
 import { Contact } from 'expo-contacts';
 import { User } from '@equalbill/stores/user/interfaces';
 import UseGroupParticipentsProps from './interfaces';
-const useGroupParticipants = ({ groupSelectedContacts }: UseGroupParticipentsProps) => {
+const useGroupParticipants = ({ participents }: UseGroupParticipentsProps) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [selectedContacts, setSelectedContacts] = useState<User[]>(groupSelectedContacts ?? []);
+  const [selectedContacts, setSelectedContacts] = useState<User[]>(participents ?? []);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
 
   const getContacts = async () => {

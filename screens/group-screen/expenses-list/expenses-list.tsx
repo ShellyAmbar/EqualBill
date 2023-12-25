@@ -12,10 +12,6 @@ const ExpensesList = ({ data, onDeleteExpense, onEditExpense }: ExpensesListProp
   return (
     <GestureHandlerRootView style={Styles.container}>
       <Box style={Styles.container}>
-        <TextFactory type="h4" style={Styles.title}>
-          {'Expenses: '}
-        </TextFactory>
-        <Spacer size={12} />
         <FlatList
           data={data}
           style={Styles.list}

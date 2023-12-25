@@ -1,7 +1,12 @@
+import { Group } from '@equalbill/stores/user/interfaces';
+
 enum StepType {
   DATA,
   MEDIA,
   PARTICIPENTS,
   COMPLETE,
 }
-export { StepType };
+type UseGroupGeneratorProps = {
+  groupToUpdate?: Group;
+};
+export { StepType, UseGroupGeneratorProps };

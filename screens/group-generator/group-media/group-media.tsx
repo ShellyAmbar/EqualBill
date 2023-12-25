@@ -9,7 +9,7 @@ import useGroupMedia from './hooks/useGroupMedia';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'react-native';
 import GroupMediaProps from './interfaces';
-const GroupMedia = forwardRef(({ imageUri, onImageUriChanged }: GroupMediaProps, ref) => {
+const GroupMedia = forwardRef(({ imageUri, onImageUriChanged, isEditable = true }: GroupMediaProps, ref) => {
   const { image, setImage } = useGroupMedia({ imageUri });
 
   useImperativeHandle(ref, () => ({
@@ -33,25 +33,33 @@ const GroupMedia = forwardRef(({ imageUri, onImageUriChanged }: GroupMediaProps,
   };
   return (
     <Box style={Styles.container}>
-      <TextFactory>{"Upload your group's image:"}</TextFactory>
-      <Spacer size={44} />
+      {isEditable && (
+        <>
+          <TextFactory>{"Upload your group's image:"}</TextFactory>
+          <Spacer size={44} />
+        </>
+      )}
       <Box style={Styles.image_container}>
         {image ? (
           <Box style={Styles.image_placeholder}>
-            <Box
-              style={Styles.close}
-              onPress={() => {
-                setImage(null);
-              }}
-            >
-              <Close width={24} height={24} />
-            </Box>
+            {isEditable && (
+              <Box
+                style={Styles.close}
+                onPress={() => {
+                  setImage(null);
+                }}
+              >
+                <Close width={24} height={24} />
+              </Box>
+            )}
             <Image style={Styles.image_inner} source={{ uri: image }} />
           </Box>
-        ) : (
+        ) : isEditable ? (
           <Box onPress={() => pickImage()} style={Styles.image_placeholder}>
             <Plus />
           </Box>
+        ) : (
+          <Box style={Styles.image_placeholder}></Box>
         )}
       </Box>
     </Box>

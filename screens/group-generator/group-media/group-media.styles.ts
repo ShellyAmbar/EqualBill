@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     width: '100%',
-    height: '100%',
     backgroundColor: GlobalColors.BgColors.Bg1,
   },
   image_container: {

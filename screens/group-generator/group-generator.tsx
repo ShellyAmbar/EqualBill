@@ -12,20 +12,28 @@ import GroupParticipents from './group-participents/group-participents';
 import Back from '@equalbill/assets/images/direction-left.svg';
 import { StepType } from './hooks/interfaces';
 import GroupCompleteView from './group-complete-view/group-complete-view';
+import UserStore from '@equalbill/stores/user/user-store';
 
-const GroupGenerator = props => {
-  const { currentStep, setCurrentStep, steps, group, setGroup } = useGroupGenerator();
+const GroupGenerator = ({ route, navigation }) => {
+  const groupToUpdate = route.params?.groupToUpdate;
+
+  const { currentStep, setCurrentStep, steps, group, setGroup, isUpdate } = useGroupGenerator({ groupToUpdate });
 
   const getCurrentStepView = () => {
     return currentStep === StepType.DATA ? (
       <GroupDetails
+        data={{ name: group.name, description: group.description }}
         onDataChanged={data => {
-          const updateGroup = { ...group, name: data.name ?? '', description: group?.description ?? '' };
+          console.log(data);
+
+          const updateGroup = { ...group, name: data.name ?? '', description: data?.description ?? '' };
+
           setGroup(updateGroup);
         }}
       />
     ) : currentStep === StepType.MEDIA ? (
       <GroupMedia
+        imageUri={group.url}
         onImageUriChanged={imageUri => {
           const updateGroup = { ...group, url: imageUri };
           setGroup(updateGroup);
@@ -33,7 +41,8 @@ const GroupGenerator = props => {
       />
     ) : currentStep === StepType.PARTICIPENTS ? (
       <GroupParticipents
-        onGroupSelectedContactsChanged={contacts => {
+        participents={group.users}
+        onParticipentsChanged={contacts => {
           const updateGroup = { ...group, users: contacts };
           setGroup(updateGroup);
         }}
@@ -45,20 +54,34 @@ const GroupGenerator = props => {
     );
   };
 
-  const saveCurrentStepData = () => {};
+  const saveGroup = () => {
+    // TODO => update group on server
+
+    //update group on store
+    if (UserStore.userGroups.find(group => group.id === group.id)) {
+      const index = UserStore.userGroups.findIndex(group => group.id === group.id);
+      UserStore.userGroups[index] = group;
+      UserStore.setUserGroups([...UserStore.userGroups]);
+    } else {
+      UserStore.setUserGroups([...UserStore.userGroups, group]);
+    }
+
+    // returning updated group
+    route.params?.onUpdate(group);
+  };
   return (
     <Box style={Styles.container}>
       <Spacer size={30} />
       <Box style={Styles.horizontal}>
         <Box
           onPress={() => {
-            props.navigation.navigate('Home');
+            navigation.goBack();
           }}
         >
           <Back width={24} height={24} />
         </Box>
         <TextFactory style={Styles.buttonText} type="h1">
-          {'Create Group'}
+          {isUpdate ? 'Update Group' : 'Create Group'}
         </TextFactory>
         <Box style={{ width: 24, height: 24 }} />
       </Box>
@@ -95,14 +118,17 @@ const GroupGenerator = props => {
         <Box
           style={Styles.button}
           onPress={() => {
-            currentStep === StepType.COMPLETE ? props.navigation.navigate('Home') : null;
+            if (currentStep === StepType.COMPLETE) {
+              saveGroup();
+              navigation.goBack();
+            }
             setCurrentStep(prev => {
               return prev < steps - 1 ? prev + 1 : prev;
             });
           }}
         >
           <TextFactory type="h4" style={Styles.buttonText}>
-            {currentStep === StepType.COMPLETE ? 'Create' : 'Next'}
+            {currentStep === StepType.COMPLETE ? (isUpdate ? 'Update' : 'Create') : 'Next'}
           </TextFactory>
         </Box>
       </Box>

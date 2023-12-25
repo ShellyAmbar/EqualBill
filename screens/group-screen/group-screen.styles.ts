@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     height: '100%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   title: {
     color: GlobalColors.TextColors.white,
@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     bottom: 30,
     zIndex: 2,
     left: 16,
+  },
+  subTitle: {
+    color: GlobalColors.Brand.primary,
   },
 });
 
