@@ -11,7 +11,7 @@ import ExpenseFormProps from './interfaces';
 import useExpenseForm from './hooks/useExpenseForm';
 
 const ExpenseForm = ({ titleText, buttonText, expense, onConfirm }: ExpenseFormProps) => {
-  const { expenseToEdit, setExpenseToEdit } = useExpenseForm();
+  const { expenseToEdit, setExpenseToEdit } = useExpenseForm(expense);
   return (
     <Box scroll style={Styles.container}>
       <KeyboardAvoidingView>

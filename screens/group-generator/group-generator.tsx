@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Box } from '@equalbill/components/controllers/box/box';
 import Styles from './group-generator.styles';
 import HorizontalGradiantProgressbar from '@equalbill/components/horizontal-gradiant-progressbar/horizontal-gradiant-progressbar';
@@ -10,13 +10,42 @@ import GroupDetails from './group-details/group-details';
 import GroupMedia from './group-media/group-media';
 import GroupParticipents from './group-participents/group-participents';
 import Back from '@equalbill/assets/images/direction-left.svg';
+import { StepType } from './hooks/interfaces';
+import GroupCompleteView from './group-complete-view/group-complete-view';
 
 const GroupGenerator = props => {
-  const { currentStep, setCurrentStep, steps } = useGroupGenerator();
+  const { currentStep, setCurrentStep, steps, group, setGroup } = useGroupGenerator();
 
   const getCurrentStepView = () => {
-    return currentStep === 0 ? <GroupDetails /> : currentStep === 1 ? <GroupMedia /> : <GroupParticipents />;
+    return currentStep === StepType.DATA ? (
+      <GroupDetails
+        onDataChanged={data => {
+          const updateGroup = { ...group, name: data.name ?? '', description: group?.description ?? '' };
+          setGroup(updateGroup);
+        }}
+      />
+    ) : currentStep === StepType.MEDIA ? (
+      <GroupMedia
+        onImageUriChanged={imageUri => {
+          const updateGroup = { ...group, url: imageUri };
+          setGroup(updateGroup);
+        }}
+      />
+    ) : currentStep === StepType.PARTICIPENTS ? (
+      <GroupParticipents
+        onGroupSelectedContactsChanged={contacts => {
+          const updateGroup = { ...group, users: contacts };
+          setGroup(updateGroup);
+        }}
+      />
+    ) : currentStep === StepType.COMPLETE ? (
+      <GroupCompleteView group={group} />
+    ) : (
+      <></>
+    );
   };
+
+  const saveCurrentStepData = () => {};
   return (
     <Box style={Styles.container}>
       <Spacer size={30} />
@@ -66,16 +95,14 @@ const GroupGenerator = props => {
         <Box
           style={Styles.button}
           onPress={() => {
+            currentStep === StepType.COMPLETE ? props.navigation.navigate('Home') : null;
             setCurrentStep(prev => {
-              if (prev === steps - 1) {
-                props.navigation.navigate('Home');
-              }
-              return prev < steps - 1 ? prev + 1 : steps - 1;
+              return prev < steps - 1 ? prev + 1 : prev;
             });
           }}
         >
           <TextFactory type="h4" style={Styles.buttonText}>
-            {'Next'}
+            {currentStep === StepType.COMPLETE ? 'Create' : 'Next'}
           </TextFactory>
         </Box>
       </Box>

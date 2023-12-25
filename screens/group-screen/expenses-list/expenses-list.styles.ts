@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     height: '100%',
-    alignItems: 'center',
   },
   list: {
     width: '100%',
@@ -17,9 +16,22 @@ const styles = StyleSheet.create({
 
     paddingBottom: 50,
   },
+  swipe_item: {
+    backgroundColor: '#FFFF',
+
+    shadowColor: 'gray',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    elevation: 2,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
   list_item: {
     borderRadius: 10,
-    justifyContent: 'space-between',
     flexDirection: 'column',
     backgroundColor: '#FFFF',
     paddingHorizontal: 10,
@@ -30,11 +42,8 @@ const styles = StyleSheet.create({
   },
   item_text: { color: GlobalColors.TextColors.secondary },
   title: {
-    color: GlobalColors.TextColors.white,
-    position: 'absolute',
-    bottom: 30,
-    zIndex: 2,
-    left: 16,
+    color: GlobalColors.TextColors.primary,
+    textAlign: 'left',
   },
 });
 

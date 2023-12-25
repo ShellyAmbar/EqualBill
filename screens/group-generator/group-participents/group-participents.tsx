@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import Styles from './group-participents.styles';
 import { Box } from '@equalbill/components/controllers/box/box';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
@@ -10,12 +10,23 @@ import ContactItem from './contact-item/contact-item';
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import HorizontalUsersSlider from '@equalbill/components/horizontal-users-slider/horizontal-users-slider';
 import { User } from '@equalbill/stores/user/interfaces';
-const GroupParticipents = () => {
-  const { contacts, setSelectedContacts, selectedContacts, filteredContacts, setFilteredContacts } = useGroupParticipants();
+import GroupParticipentsProps from './interfaces';
+const GroupParticipents = forwardRef(({ groupSelectedContacts, onGroupSelectedContactsChanged }: GroupParticipentsProps, ref) => {
+  const { contacts, setSelectedContacts, selectedContacts, filteredContacts, setFilteredContacts } = useGroupParticipants({ groupSelectedContacts });
+
+  useImperativeHandle(ref, () => ({
+    getParticipents() {
+      return {
+        selectedContacts,
+      };
+    },
+  }));
+
   const updateSelectedContacts = ({ contact, isAdd }: { contact: User; isAdd: boolean }) => {
     if (isAdd) {
       if (!selectedContacts?.find(item => item.id === contact.id)) {
         setSelectedContacts(selected => {
+          onGroupSelectedContactsChanged && onGroupSelectedContactsChanged([...selected, contact]);
           return [...selected, contact];
         });
       }
@@ -23,6 +34,7 @@ const GroupParticipents = () => {
       if (selectedContacts?.find(item => item.id === contact.id)) {
         setSelectedContacts(selected => {
           const filteredList = selected.filter(item => item.id !== contact.id);
+          onGroupSelectedContactsChanged && onGroupSelectedContactsChanged([...filteredList]);
           return [...filteredList];
         });
       }
@@ -103,6 +115,6 @@ const GroupParticipents = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default GroupParticipents;

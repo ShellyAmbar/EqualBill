@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import * as Contacts from 'expo-contacts';
 import { Contact } from 'expo-contacts';
 import { User } from '@equalbill/stores/user/interfaces';
-const useGroupParticipants = () => {
+import UseGroupParticipentsProps from './interfaces';
+const useGroupParticipants = ({ groupSelectedContacts }: UseGroupParticipentsProps) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [selectedContacts, setSelectedContacts] = useState<User[]>([]);
+  const [selectedContacts, setSelectedContacts] = useState<User[]>(groupSelectedContacts ?? []);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
 
   const getContacts = async () => {

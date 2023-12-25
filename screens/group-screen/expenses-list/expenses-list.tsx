@@ -12,128 +12,55 @@ const ExpensesList = ({ data, onDeleteExpense, onEditExpense }: ExpensesListProp
   return (
     <GestureHandlerRootView style={Styles.container}>
       <Box style={Styles.container}>
-        <TextFactory type="h3" style={Styles.title}>
+        <TextFactory type="h4" style={Styles.title}>
           {'Expenses: '}
         </TextFactory>
+        <Spacer size={12} />
         <FlatList
           data={data}
           style={Styles.list}
           ItemSeparatorComponent={() => <Spacer size={5} />}
           contentContainerStyle={Styles.content}
-          renderItem={({ item, index }: { item: Expense; index: number }) => (
-            <SwipeActions
-              key={item.id}
-              style={{
-                backgroundColor: '#FFFF',
-
-                shadowColor: 'gray',
-                shadowOpacity: 0.5,
-                shadowRadius: 10,
-                elevation: 2,
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                borderRadius: 10,
-                overflow: 'hidden',
-              }}
-              onPressButton={() => {}}
-              rightActionsTotalWidthInPrecentages="50%"
-              leftAction={{
-                name: 'delete',
-                buttonStyle: { backgroundColor: 'red' },
-                textStyle: { color: '#FFFF' },
-
-                onPress: () => {
-                  onDeleteExpense(item);
-                },
-              }}
-              rightActions={[
-                {
-                  name: 'edit',
-                  buttonStyle: { backgroundColor: 'grey' },
+          keyExtractor={(item, index) => item.id}
+          renderItem={({ item, index }: { item: Expense; index: number }) => {
+            console.log(item.id);
+            return (
+              <SwipeActions
+                key={item.id}
+                style={Styles.swipe_item}
+                onPressButton={() => {}}
+                onEndSwipeLeft={() => {
+                  onDeleteExpense && onDeleteExpense(item);
+                }}
+                rightActionsTotalWidthInPrecentages="50%"
+                leftAction={{
+                  name: 'delete',
+                  buttonStyle: { backgroundColor: 'red' },
                   textStyle: { color: '#FFFF' },
-                  onPress: () => {
-                    onEditExpense(item);
+                }}
+                rightActions={[
+                  {
+                    name: 'edit',
+                    buttonStyle: { backgroundColor: 'grey' },
+                    textStyle: { color: '#FFFF' },
+                    onPress: () => {
+                      onEditExpense(item);
+                    },
                   },
-                },
-              ]}
-            >
-              <Box key={item.id} style={Styles.list_item}>
-                <TextFactory type="h5" style={Styles.item_title}>
-                  {item.name}
-                </TextFactory>
-                <TextFactory type="h6" numberOfLines={2} style={Styles.item_text}>
-                  {item.amount}
-                </TextFactory>
-              </Box>
-            </SwipeActions>
-          )}
+                ]}
+              >
+                <Box key={item.id} style={Styles.list_item}>
+                  <TextFactory type="h5" style={Styles.item_title}>
+                    {item.name}
+                  </TextFactory>
+                  <TextFactory type="h6" numberOfLines={2} style={Styles.item_text}>
+                    {item.amount}
+                  </TextFactory>
+                </Box>
+              </SwipeActions>
+            );
+          }}
         />
-        {/* {data.map(item => (
-          <Box
-            style={{
-              width: '100%',
-            }}
-          >
-            <SwipeActions
-              key={item.id}
-              style={{
-                backgroundColor: '#FFFF',
-
-                shadowColor: 'gray',
-                shadowOpacity: 0.5,
-                shadowRadius: 10,
-                elevation: 2,
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                borderRadius: 10,
-                overflow: 'hidden',
-              }}
-              onPressButton={() => {}}
-              rightActionsTotalWidthInPrecentages="50%"
-              leftAction={{
-                name: 'delete',
-                buttonStyle: { backgroundColor: 'red' },
-                textStyle: { color: '#FFFF' },
-
-                onPress: () => {},
-              }}
-              rightActions={[
-                {
-                  name: 'edit',
-                  buttonStyle: { backgroundColor: 'grey' },
-                  textStyle: { color: '#FFFF' },
-                  onPress: () => {},
-                },
-                {
-                  name: 'save',
-                  buttonStyle: { backgroundColor: 'purple' },
-                  textStyle: { color: '#FFFF' },
-                  onPress: () => {},
-                },
-                {
-                  name: 'go',
-                  buttonStyle: { backgroundColor: 'pink' },
-                  textStyle: { color: '#FFFF' },
-                  onPress: () => {},
-                },
-              ]}
-            >
-              <Box key={item.id} style={Styles.list_item}>
-                <TextFactory type="h5" style={Styles.item_title}>
-                  {item.name}
-                </TextFactory>
-                <TextFactory type="h6" numberOfLines={2} style={Styles.item_text}>
-                  {item.amount}
-                </TextFactory>
-              </Box>
-            </SwipeActions>
-            <Spacer size={5} />
-          </Box>
-        ))} */}
       </Box>
     </GestureHandlerRootView>
   );

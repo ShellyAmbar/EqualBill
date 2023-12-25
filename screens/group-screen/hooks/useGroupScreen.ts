@@ -42,6 +42,7 @@ const useGroupScreen = ({ groupItem }: UseGroupScreenProps) => {
     setGroup(group);
   };
   const addExpense = (expense: Expense) => {
+    expense.id = (group.expenses.length - 1).toString();
     const updateList = [...group.expenses, expense];
     group.expenses = [...updateList];
     setGroup(group);

@@ -1,4 +1,4 @@
-import { View, Animated, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { View, Animated, TouchableOpacity, Dimensions, Image, VirtualizedList, FlatList } from 'react-native';
 import React, { useRef } from 'react';
 import createStyles from './collapsing-scroll.styles';
 
@@ -28,7 +28,38 @@ const CollapsingScroll = ({ ...props }: CollapsingScrollProps) => {
         </AnimatedPressable>
       )}
 
-      <Animated.ScrollView
+      <Animated.FlatList
+        ListHeaderComponent={() => (
+          <>
+            <View style={styles.image}>{props.constantTopBackground()}</View>
+            <Animated.View
+              style={{
+                ...styles.image,
+
+                transform: [
+                  {
+                    scale: scrollY.interpolate({
+                      inputRange: [-imageHeight, 0, imageHeight, imageHeight + 1],
+                      outputRange: [2, 1, 0.5, 0.5],
+                    }),
+                  },
+                  {
+                    translateY: scrollY.interpolate({
+                      inputRange: [-imageHeight, 0, imageHeight, imageHeight + 1],
+                      outputRange: [-imageHeight / 2, 0, imageHeight * 0.75, imageHeight * 0.75],
+                    }),
+                  },
+                ],
+              }}
+            >
+              {props.image()}
+            </Animated.View>
+            <View style={{ ...styles.DataContainer, ...props.dataContainerStyle }}>
+              <View style={styles.mainContainer}>{props.children}</View>
+            </View>
+          </>
+        )}
+        data={[]}
         showsVerticalScrollIndicator={false}
         onScroll={Animated.event(
           [
@@ -42,37 +73,9 @@ const CollapsingScroll = ({ ...props }: CollapsingScrollProps) => {
         )}
         scrollEventThrottle={16}
         style={{ ...styles.scroll, ...props.scrollStyle }}
+        renderItem={() => <></>}
         {...props.scrollProps}
-      >
-        <>
-          <View style={styles.image}>{props.constantTopBackground()}</View>
-          <Animated.View
-            style={{
-              ...styles.image,
-
-              transform: [
-                {
-                  scale: scrollY.interpolate({
-                    inputRange: [-imageHeight, 0, imageHeight, imageHeight + 1],
-                    outputRange: [2, 1, 0.5, 0.5],
-                  }),
-                },
-                {
-                  translateY: scrollY.interpolate({
-                    inputRange: [-imageHeight, 0, imageHeight, imageHeight + 1],
-                    outputRange: [-imageHeight / 2, 0, imageHeight * 0.75, imageHeight * 0.75],
-                  }),
-                },
-              ],
-            }}
-          >
-            {props.image()}
-          </Animated.View>
-          <View style={{ ...styles.DataContainer, ...props.dataContainerStyle }}>
-            <View style={styles.mainContainer}>{props.children}</View>
-          </View>
-        </>
-      </Animated.ScrollView>
+      />
     </View>
   );
 };

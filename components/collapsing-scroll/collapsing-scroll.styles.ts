@@ -49,6 +49,7 @@ const createStyles = (imageHeight: number) =>
       flexDirection: 'column',
       width: '100%',
       minHeight: height - imageHeight,
+
       paddingTop: 16,
       paddingHorizontal: 20,
       alignItems: 'center',

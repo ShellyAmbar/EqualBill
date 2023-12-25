@@ -10,7 +10,8 @@ type Group = {
   admin_id: string;
   expenses: Expense[];
   name: string;
-  users_ids: string[];
+  description: string;
+  users: User[];
   url?: string;
 };
 

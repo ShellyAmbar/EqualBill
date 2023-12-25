@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Box } from '@equalbill/components/controllers/box/box';
 import Styles from './group-media.styles';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
@@ -8,9 +8,15 @@ import Close from '@equalbill/assets/images/closeIcon.svg';
 import useGroupMedia from './hooks/useGroupMedia';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'react-native';
-const GroupMedia = () => {
-  const { image, setImage } = useGroupMedia();
+import GroupMediaProps from './interfaces';
+const GroupMedia = forwardRef(({ imageUri, onImageUriChanged }: GroupMediaProps, ref) => {
+  const { image, setImage } = useGroupMedia({ imageUri });
 
+  useImperativeHandle(ref, () => ({
+    getGroupMedia() {
+      return { uri: image };
+    },
+  }));
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -22,6 +28,7 @@ const GroupMedia = () => {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      onImageUriChanged && onImageUriChanged(result.assets[0].uri);
     }
   };
   return (
@@ -49,6 +56,6 @@ const GroupMedia = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default GroupMedia;
