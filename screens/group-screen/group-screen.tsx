@@ -19,8 +19,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ExpensesList from './expenses-list/expenses-list';
 import ExpenseForm from './expense-form/expense-form';
 import { Group } from '@equalbill/stores/user/interfaces';
+import { observer } from 'mobx-react';
+import UserStore from '@equalbill/stores/user/user-store';
 
-const GroupScreen = ({ route, navigation }) => {
+const GroupScreen = observer(({ route, navigation }) => {
   const { group: groupFromProps }: { group: Group } = route.params;
 
   const onclickBack = () => {
@@ -118,7 +120,7 @@ const GroupScreen = ({ route, navigation }) => {
             {'Participents: '}
           </TextFactory>
           <HorizontalUsersSlider
-            data={group.users}
+            data={[...group.users, UserStore.user]}
             onPressItem={item => {
               setSelectedUser(item);
             }}
@@ -167,6 +169,6 @@ const GroupScreen = ({ route, navigation }) => {
       />
     </Box>
   );
-};
+});
 
 export default GroupScreen;

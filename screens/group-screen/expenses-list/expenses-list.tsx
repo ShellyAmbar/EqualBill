@@ -19,7 +19,6 @@ const ExpensesList = ({ data, onDeleteExpense, onEditExpense }: ExpensesListProp
           contentContainerStyle={Styles.content}
           keyExtractor={(item, index) => item.id}
           renderItem={({ item, index }: { item: Expense; index: number }) => {
-            console.log(item.id);
             return (
               <SwipeActions
                 key={item.id}

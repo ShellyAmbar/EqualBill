@@ -17,7 +17,19 @@ import UserStore from '@equalbill/stores/user/user-store';
 const GroupGenerator = ({ route, navigation }) => {
   const groupToUpdate = route.params?.groupToUpdate;
 
-  const { currentStep, setCurrentStep, steps, group, setGroup, isUpdate } = useGroupGenerator({ groupToUpdate });
+  const { currentStep, setCurrentStep, steps, group, setGroup } = useGroupGenerator({
+    groupToUpdate: groupToUpdate
+      ? groupToUpdate
+      : {
+          name: '',
+          description: '',
+          id: Math.floor(Math.random() * 1000) + UserStore.user.id,
+          url: '',
+          users: [],
+          admin_id: UserStore.user.id,
+          expenses: [],
+        },
+  });
 
   const getCurrentStepView = () => {
     return currentStep === StepType.DATA ? (
@@ -58,7 +70,7 @@ const GroupGenerator = ({ route, navigation }) => {
     // TODO => update group on server
 
     //update group on store
-    if (UserStore.userGroups.find(group => group.id === group.id)) {
+    if (UserStore.userGroups.find(groupItem => groupItem.id === group.id)) {
       const index = UserStore.userGroups.findIndex(group => group.id === group.id);
       UserStore.userGroups[index] = group;
       UserStore.setUserGroups([...UserStore.userGroups]);
@@ -81,7 +93,7 @@ const GroupGenerator = ({ route, navigation }) => {
           <Back width={24} height={24} />
         </Box>
         <TextFactory style={Styles.buttonText} type="h1">
-          {isUpdate ? 'Update Group' : 'Create Group'}
+          {groupToUpdate ? 'Update Group' : 'Create Group'}
         </TextFactory>
         <Box style={{ width: 24, height: 24 }} />
       </Box>
@@ -128,7 +140,7 @@ const GroupGenerator = ({ route, navigation }) => {
           }}
         >
           <TextFactory type="h4" style={Styles.buttonText}>
-            {currentStep === StepType.COMPLETE ? (isUpdate ? 'Update' : 'Create') : 'Next'}
+            {currentStep === StepType.COMPLETE ? (groupToUpdate ? 'Update' : 'Create') : 'Next'}
           </TextFactory>
         </Box>
       </Box>

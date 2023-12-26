@@ -6,8 +6,9 @@ import HorizontalUsersSlider from '@equalbill/components/horizontal-users-slider
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
 import GroupMedia from '../group-media/group-media';
-
-const GroupCompleteView = ({ group }: GroupCompleteViewProps) => {
+import UserStore from '@equalbill/stores/user/user-store';
+import { observer } from 'mobx-react';
+const GroupCompleteView = observer(({ group }: GroupCompleteViewProps) => {
   return (
     <Box scroll style={Styles.container} contentContainerStyle={Styles.content}>
       <TextFactory style={Styles.title} type="h4">
@@ -34,10 +35,10 @@ const GroupCompleteView = ({ group }: GroupCompleteViewProps) => {
         {'Participents:'}
       </TextFactory>
 
-      <HorizontalUsersSlider data={group.users} />
+      <HorizontalUsersSlider data={[...group.users, UserStore.user]} />
       <Spacer size={120} />
     </Box>
   );
-};
+});
 
 export default GroupCompleteView;

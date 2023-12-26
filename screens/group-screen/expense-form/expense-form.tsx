@@ -9,9 +9,12 @@ import Button from '@equalbill/components/controllers/button/button';
 import { GlobalColors } from '@equalbill/styles/global-colors';
 import ExpenseFormProps from './interfaces';
 import useExpenseForm from './hooks/useExpenseForm';
+import UserStore from '@equalbill/stores/user/user-store';
 
 const ExpenseForm = ({ titleText, buttonText, expense, onConfirm }: ExpenseFormProps) => {
-  const { expenseToEdit, setExpenseToEdit } = useExpenseForm(expense);
+  const { expenseToEdit, setExpenseToEdit } = useExpenseForm(
+    expense ? expense : { id: Math.floor(Math.random() * 1000) + UserStore.user.id, name: '', amount: '', user_id: UserStore.user.id },
+  );
   return (
     <Box scroll style={Styles.container}>
       <KeyboardAvoidingView>

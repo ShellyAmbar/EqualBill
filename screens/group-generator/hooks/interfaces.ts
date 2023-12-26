@@ -7,6 +7,6 @@ enum StepType {
   COMPLETE,
 }
 type UseGroupGeneratorProps = {
-  groupToUpdate?: Group;
+  groupToUpdate: Group;
 };
 export { StepType, UseGroupGeneratorProps };
