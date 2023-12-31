@@ -30,8 +30,10 @@ const GroupsSlider = ({ data, style }: GroupsSliderProps) => {
       ItemSeparatorComponent={() => <Spacer size={12} isVertical={false} />}
       style={[Styles.list, { ...style }]}
       contentContainerStyle={Styles.content}
+      keyExtractor={(item, index) => item.id}
       renderItem={({ item, index }) => (
         <GroupItem
+          key={item.id}
           item={item}
           onPress={() => {
             scrollToIndex(item);

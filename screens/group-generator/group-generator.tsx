@@ -71,7 +71,9 @@ const GroupGenerator = ({ route, navigation }) => {
 
     //update group on store
     if (UserStore.userGroups.find(groupItem => groupItem.id === group.id)) {
-      const index = UserStore.userGroups.findIndex(group => group.id === group.id);
+      const index = UserStore.userGroups.findIndex(groupItem => groupItem.id === group.id);
+      console.log('index', index, group.id, Math.floor(Math.random() * 1000));
+
       UserStore.userGroups[index] = group;
       UserStore.setUserGroups([...UserStore.userGroups]);
     } else {
