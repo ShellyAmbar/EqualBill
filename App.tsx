@@ -9,7 +9,7 @@ import { Text, View, SafeAreaView } from 'react-native';
 export default function App() {
   return (
     <>
-      <StatusBar backgroundColor={GlobalColors.BgColors.Bg2} style={'inverted'} />
+      {/* <StatusBar backgroundColor={GlobalColors.BgColors.Bg2} style={'inverted'} /> */}
       <SafeAreaView style={{ flex: 1, backgroundColor: GlobalColors.BgColors.Bg1 }}>
         <NavigationContainer>
           <MainStack />

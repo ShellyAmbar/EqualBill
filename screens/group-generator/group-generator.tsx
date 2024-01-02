@@ -13,6 +13,7 @@ import Back from '@equalbill/assets/images/direction-left.svg';
 import { StepType } from './hooks/interfaces';
 import GroupCompleteView from './group-complete-view/group-complete-view';
 import UserStore from '@equalbill/stores/user/user-store';
+import Header from '@equalbill/components/header/header';
 
 const GroupGenerator = ({ route, navigation }) => {
   const groupToUpdate = route.params?.groupToUpdate;
@@ -86,19 +87,12 @@ const GroupGenerator = ({ route, navigation }) => {
   return (
     <Box style={Styles.container}>
       <Spacer size={30} />
-      <Box style={Styles.horizontal}>
-        <Box
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Back width={24} height={24} />
-        </Box>
-        <TextFactory style={Styles.buttonText} type="h1">
-          {groupToUpdate ? 'Update Group' : 'Create Group'}
-        </TextFactory>
-        <Box style={{ width: 24, height: 24 }} />
-      </Box>
+      <Header
+        onClickBack={() => {
+          navigation.goBack();
+        }}
+        title={groupToUpdate ? 'Update Group' : 'Create Group'}
+      />
 
       <Spacer size={44} />
       <HorizontalGradiantProgressbar

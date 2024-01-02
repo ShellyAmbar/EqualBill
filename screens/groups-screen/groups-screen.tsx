@@ -1,10 +1,17 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import { Box } from '@equalbill/components/controllers/box/box';
+import Header from '@equalbill/components/header/header';
 
-const GroupsScreen = () => {
+const GroupsScreen = ({ navigation }) => {
   return (
     <View>
-      <Text>G</Text>
+      <Header
+        title="All Groups"
+        onClickBack={() => {
+          navigation.navigate('Home');
+        }}
+      />
     </View>
   );
 };

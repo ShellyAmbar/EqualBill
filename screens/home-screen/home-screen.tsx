@@ -51,7 +51,12 @@ const HomeScreen = observer(props => {
         <Box style={styles.horizontal_spaced}>
           <TextFactory type="h2">{'Your groups'}</TextFactory>
           {UserStore.userGroups?.length > 0 && (
-            <Box style={[styles.button_all, styles.shadow]} onPress={() => {}}>
+            <Box
+              style={[styles.button_all, styles.shadow]}
+              onPress={() => {
+                props.navigation.navigate('Groups');
+              }}
+            >
               <TextFactory style={styles.button_all_text} type="h5">
                 {'See all'}
               </TextFactory>
