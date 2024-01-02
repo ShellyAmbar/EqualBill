@@ -8,7 +8,7 @@ import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import GroupItem from './group-item/group-item';
 import { useNavigation } from '@react-navigation/native';
 
-const GroupsSlider = ({ data, style }: GroupsSliderProps) => {
+const GroupsSlider = ({ data, style, isHorizontal = true, onPress }: GroupsSliderProps) => {
   const flatlistRef = useRef(null);
   const navigation = useNavigation();
 
@@ -17,29 +17,30 @@ const GroupsSlider = ({ data, style }: GroupsSliderProps) => {
     console.log('index', indexToScroll);
 
     flatlistRef.current?.scrollToIndex({ index: indexToScroll, animated: true });
-    navigation.navigate('Group', {
-      group: group,
-    });
   };
   return (
     <FlatList
       showsHorizontalScrollIndicator={false}
       ref={flatlistRef}
       data={data}
-      horizontal
-      ItemSeparatorComponent={() => <Spacer size={12} isVertical={false} />}
+      horizontal={isHorizontal}
+      ItemSeparatorComponent={() => <Spacer size={12} isVertical={!isHorizontal} />}
       style={[Styles.list, { ...style }]}
       contentContainerStyle={Styles.content}
       keyExtractor={(item, index) => item.id}
       renderItem={({ item, index }) => (
         <GroupItem
+          style={!isHorizontal ? { width: '49%' } : {}}
           key={item.id}
           item={item}
           onPress={() => {
-            scrollToIndex(item);
+            isHorizontal && scrollToIndex(item);
+            onPress && onPress(item);
           }}
         />
       )}
+      numColumns={isHorizontal ? 0 : 2}
+      columnWrapperStyle={isHorizontal ? null : { justifyContent: 'space-between' }}
     />
   );
 };

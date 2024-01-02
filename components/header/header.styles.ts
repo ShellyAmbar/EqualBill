@@ -6,6 +6,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 8,
   },
   button: {
     justifyContent: 'center',

@@ -5,10 +5,10 @@ export const createStyle = (size: number, isVertical: boolean) => {
     container: {
       ...(isVertical
         ? {
-            marginTop: size,
+            height: size,
             width: '100%',
           }
-        : { marginEnd: size }),
+        : { width: size, height: '100%' }),
 
       justifyContent: 'center',
       alignItems: 'center',

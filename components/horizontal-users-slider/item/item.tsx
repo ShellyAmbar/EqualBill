@@ -6,7 +6,7 @@ import { ItemProps } from './interfaces';
 import { Image } from 'react-native';
 import CloseIcon from '@equalbill/assets/images/closeIcon.svg';
 
-const Item = ({ item, onPress, onPressDelete }: ItemProps) => {
+const Item = ({ item, onPress, onPressDelete, selectedItemId }: ItemProps) => {
   return (
     <Box
       onPress={() => {
@@ -21,7 +21,7 @@ const Item = ({ item, onPress, onPressDelete }: ItemProps) => {
           </Box>
         )}
         <Image
-          style={Styles.image}
+          style={[Styles.image, selectedItemId === item.id ? Styles.selected : {}]}
           resizeMode="cover"
           source={{ uri: item.url ? item.url : 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' }}
         />

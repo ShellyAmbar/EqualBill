@@ -6,6 +6,7 @@ type ItemProps = {
   onPress?: (item: User) => void;
   style?: ViewStyle;
   onPressDelete?: (item: User) => void;
+  selectedItemId: string;
 };
 
 export { ItemProps };

@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     borderColor: GlobalColors.Border,
     borderWidth: 1,
   },
+  selected: {
+    borderColor: GlobalColors.Brand.primary,
+  },
   cancelableImage: {
     zIndex: 0,
     width: 60,

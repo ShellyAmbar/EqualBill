@@ -73,7 +73,6 @@ const GroupGenerator = ({ route, navigation }) => {
     //update group on store
     if (UserStore.userGroups.find(groupItem => groupItem.id === group.id)) {
       const index = UserStore.userGroups.findIndex(groupItem => groupItem.id === group.id);
-      console.log('index', index, group.id, Math.floor(Math.random() * 1000));
 
       UserStore.userGroups[index] = group;
       UserStore.setUserGroups([...UserStore.userGroups]);
@@ -86,7 +85,6 @@ const GroupGenerator = ({ route, navigation }) => {
   };
   return (
     <Box style={Styles.container}>
-      <Spacer size={30} />
       <Header
         onClickBack={() => {
           navigation.goBack();

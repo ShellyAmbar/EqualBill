@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box } from '../controllers/box/box';
 import Styles from './horizontal-users-slider.styles';
 import HorizontalUsersSliderProps from './interfaces';
@@ -6,9 +6,17 @@ import { FlatList } from 'react-native';
 import Item from './item/item';
 import Spacer from '../controllers/spacer/spacer';
 import { User } from '@equalbill/stores/user/interfaces';
+import useHorizontalUsersSlider from './hooks/useHorizontalUsersSlider';
 
 const HorizontalUsersSlider = ({ data = [], style, onPressItem, onPressDeleteItem }: HorizontalUsersSliderProps) => {
   const flatlistRef = useRef(null);
+  const { selectedItemId, setSelectedItemId } = useHorizontalUsersSlider({ data });
+
+  useEffect(() => {
+    if (data?.length > 0) {
+      onPressItem && onPressItem(data[0]);
+    }
+  }, []);
 
   const scrollToIndex = (user: User) => {
     const indexToScroll = data.findIndex(item => item.id === user.id);
@@ -27,8 +35,10 @@ const HorizontalUsersSlider = ({ data = [], style, onPressItem, onPressDeleteIte
         contentContainerStyle={Styles.content}
         renderItem={({ item, index }) => (
           <Item
+            selectedItemId={selectedItemId}
             item={item}
             onPress={item => {
+              setSelectedItemId(item.id);
               scrollToIndex(item);
               onPressItem && onPressItem(item);
             }}

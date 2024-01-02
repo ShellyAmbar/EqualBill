@@ -7,13 +7,13 @@ import TextFactory from '@equalbill/components/factories/text-factory/text-facto
 import styles from './group-item.styles';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const GroupItem = ({ item, onPress }: GroupItemProps) => {
+const GroupItem = ({ item, onPress, style }: GroupItemProps) => {
   return (
     <Box
       onPress={() => {
         onPress && onPress(item);
       }}
-      style={[Styles.rect, styles.shadow]}
+      style={[Styles.rect, styles.shadow, style]}
     >
       <Image
         style={Styles.image}

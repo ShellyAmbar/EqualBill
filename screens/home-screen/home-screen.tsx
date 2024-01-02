@@ -1,9 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
-
 import { Box } from '../../components/controllers/box/box';
 import Styles from './home-screen.styles';
-import GroupsSlider from './groups-slider/groups-slider';
 import useHomeScreen from './hooks/useHomeScreen';
 import styles from './home-screen.styles';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
@@ -14,6 +12,7 @@ import Splash from 'rn-splash-effect';
 import { width } from '@equalbill/styles/styles';
 import UserStore from '@equalbill/stores/user/user-store';
 import { observer } from 'mobx-react';
+import GroupsSlider from '@equalbill/components/groups-slider/groups-slider';
 const HomeScreen = observer(props => {
   const {} = useHomeScreen();
 
@@ -65,7 +64,14 @@ const HomeScreen = observer(props => {
         </Box>
         <Spacer size={16} />
 
-        <GroupsSlider data={UserStore.userGroups} />
+        <GroupsSlider
+          data={UserStore.userGroups}
+          onPress={group => {
+            props.navigation.navigate('Group', {
+              group,
+            });
+          }}
+        />
       </Box>
     </Box>
   );

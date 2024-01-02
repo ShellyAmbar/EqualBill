@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
 
     justifyContent: 'center',
-    alignItems: 'center',
-    height: 170,
+    // alignItems: 'center',
+    //  height: 170,
   },
 });
 
