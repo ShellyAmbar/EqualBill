@@ -15,7 +15,7 @@ const SplashScreen = (props: any) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      props.navigation.navigate('Main');
+      props.navigation.navigate('Auth');
     }, 1500);
     return () => clearTimeout(timeout);
   }, [isFontsLoaded]);
@@ -24,13 +24,7 @@ const SplashScreen = (props: any) => {
 
   return (
     <Box style={Styles.container}>
-      <LottieView
-        autoPlay
-        ref={animation}
-        style={Styles.lottie}
-        source={require('@equalbill/assets/lotties/splash.json')}
-        loop
-      />
+      <LottieView autoPlay ref={animation} style={Styles.lottie} source={require('@equalbill/assets/lotties/splash.json')} loop />
     </Box>
   );
 };
