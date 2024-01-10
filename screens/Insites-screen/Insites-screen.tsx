@@ -6,15 +6,17 @@ import Header from '@equalbill/components/header/header';
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import GroupsSlider from '@equalbill/components/groups-slider/groups-slider';
 import UserStore from '@equalbill/stores/user/user-store';
-const InsitesScreen = ({ navigation }) => {
+import { useNavigation } from '@react-navigation/native';
+const InsitesScreen = () => {
+  const navigation = useNavigation();
   return (
     <Box style={Styles.container}>
-      <Header
+      {/* <Header
         title="Insites"
         onClickBack={() => {
           navigation.navigate('Home');
         }}
-      />
+      /> */}
       <Spacer size={30} />
       <GroupsSlider data={UserStore.userGroups} isHorizontal={true} onPress={group => {}} style={{}} />
     </Box>

@@ -9,7 +9,7 @@ import { GlobalColors } from '@equalbill/styles/global-colors';
 import { height, width } from '@equalbill/styles/styles';
 import Edit from '@equalbill/assets/images/edit.svg';
 
-export default function ProfileScreen() {
+const ProfileScreen = () => {
   return (
     <Box style={Styles.container}>
       <LinearGradient
@@ -102,4 +102,5 @@ export default function ProfileScreen() {
       </Box>
     </Box>
   );
-}
+};
+export default ProfileScreen;

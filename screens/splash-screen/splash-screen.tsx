@@ -24,13 +24,7 @@ const SplashScreen = (props: any) => {
 
   return (
     <Box style={Styles.container}>
-      <LottieView
-        autoPlay
-        ref={animation}
-        style={Styles.lottie}
-        source={require('@equalbill/assets/lotties/splash.json')}
-        loop
-      />
+      <LottieView autoPlay ref={animation} style={Styles.lottie} source={require('@equalbill/assets/lotties/splash.json')} loop />
     </Box>
   );
 };
