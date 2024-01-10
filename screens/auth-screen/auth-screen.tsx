@@ -4,14 +4,10 @@ import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from 'expo-fi
 import { initializeApp, getApp } from 'firebase/app';
 import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { app, auth } from '@equalbill/firebaseConfig';
-
-// Double-check that we can run the example
-if (!app?.options || Platform.OS === 'web') {
-  throw new Error('This example only works on Android or iOS, and requires a valid Firebase config.');
-}
+import { Box } from '@equalbill/components/controllers/box/box';
+import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
 
 const AuthScreen = () => {
-  // Ref or state management hooks
   const recaptchaVerifier = React.useRef(null);
   const [phoneNumber, setPhoneNumber] = React.useState();
   const [verificationId, setVerificationId] = React.useState();
@@ -22,9 +18,9 @@ const AuthScreen = () => {
   const attemptInvisibleVerification = false;
 
   return (
-    <View style={{ padding: 20, marginTop: 50 }}>
-      <FirebaseRecaptchaVerifierModal ref={recaptchaVerifier} firebaseConfig={app.options} attemptInvisibleVerification />
-      <Text style={{ marginTop: 20 }}>Enter phone number</Text>
+    <Box style={{ padding: 20, marginTop: 50 }}>
+      <FirebaseRecaptchaVerifierModal ref={recaptchaVerifier} firebaseConfig={app.options} attemptInvisibleVerification={false} />
+      <TextFactory style={{ marginTop: 20 }}>Enter phone number</TextFactory>
       <TextInput
         style={{ marginVertical: 10, fontSize: 17 }}
         placeholder="Enter your phone number"
@@ -38,9 +34,6 @@ const AuthScreen = () => {
         title="Send Verification Code"
         disabled={!phoneNumber}
         onPress={async () => {
-          // The FirebaseRecaptchaVerifierModal ref implements the
-          // FirebaseAuthApplicationVerifier interface and can be
-          // passed directly to `verifyPhoneNumber`.
           try {
             const phoneProvider = new PhoneAuthProvider(auth);
             const verificationId = await phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current);
@@ -86,7 +79,7 @@ const AuthScreen = () => {
         </TouchableOpacity>
       ) : undefined}
       {attemptInvisibleVerification && <FirebaseRecaptchaBanner />}
-    </View>
+    </Box>
   );
 };
 
