@@ -15,7 +15,7 @@ const SplashScreen = (props: any) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      props.navigation.navigate('Auth');
+      props.navigation.navigate('Main');
     }, 1500);
     return () => clearTimeout(timeout);
   }, [isFontsLoaded]);

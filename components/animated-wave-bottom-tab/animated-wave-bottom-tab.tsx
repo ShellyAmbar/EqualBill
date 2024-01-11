@@ -11,16 +11,16 @@ const Tab = createBottomTabNavigator();
 
 const AnimatedWaveBottomTab = () => {
   return (
-    <Tab.Navigator tabBar={props => <CustomBottomTab {...props} />}>
+    <Tab.Navigator initialRouteName="Home" tabBar={props => <CustomBottomTab {...props} />}>
       <Tab.Group
         screenOptions={{
           headerShown: false,
         }}
       >
-        {/* <Tab.Screen options={{ tabBarLabel: 'Home' }} name="Home" component={HomeScreen} /> */}
+        <Tab.Screen options={{ tabBarLabel: 'Home' }} name="Home" component={HomeScreen} />
         <Tab.Screen options={{ tabBarLabel: 'Insites' }} name="Insites" component={InsitesScreen} />
         <Tab.Screen options={{ tabBarLabel: 'Activity' }} name="Activity" component={ActivityScreen} />
-        {/* <Tab.Screen options={{ tabBarLabel: 'Profile' }} name="Profile" component={ProfileScreen} /> */}
+        <Tab.Screen options={{ tabBarLabel: 'Profile' }} name="Profile" component={ProfileScreen} />
       </Tab.Group>
     </Tab.Navigator>
   );
