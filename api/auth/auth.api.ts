@@ -5,6 +5,7 @@ const login = async () => {
 };
 const logout = async () => {
   const auth = getAuth();
+  auth.signOut();
 };
 
 const signup = async () => {

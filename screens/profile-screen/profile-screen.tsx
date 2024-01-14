@@ -8,8 +8,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { GlobalColors } from '@equalbill/styles/global-colors';
 import { height, width } from '@equalbill/styles/styles';
 import Edit from '@equalbill/assets/images/edit.svg';
+import { logout } from '@equalbill/api/auth/auth.api';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
+  const logoutUser = async () => {
+    await logout();
+    navigation.navigate('Auth');
+  };
   return (
     <Box style={Styles.container}>
       <LinearGradient
@@ -92,7 +99,12 @@ const ProfileScreen = () => {
           </TextFactory>
         </Box>
         <Spacer size={16} />
-        <Box style={Styles.centered}>
+        <Box
+          onPress={() => {
+            logoutUser();
+          }}
+          style={Styles.centered}
+        >
           <TextFactory type="h5" style={Styles.field_subtitle}>
             {'Log out'}
           </TextFactory>

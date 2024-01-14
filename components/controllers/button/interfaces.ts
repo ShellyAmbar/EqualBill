@@ -3,5 +3,7 @@ export default interface ButtonProps extends ViewProps {
   label: string;
   lableStyle?: TextStyle;
   onPress: () => void;
-  style?: ViewStyle;
+  buttonStyle?: ViewStyle;
+  disableStyle?: ViewStyle;
+  disabled?: boolean;
 }

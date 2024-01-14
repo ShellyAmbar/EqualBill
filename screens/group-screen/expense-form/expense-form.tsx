@@ -51,7 +51,7 @@ const ExpenseForm = ({ titleText, buttonText, expense, onConfirm }: ExpenseFormP
         <Button
           onPress={() => onConfirm(expenseToEdit)}
           label={buttonText}
-          style={{
+          buttonStyle={{
             width: '70%',
             height: 60,
             justifyContent: 'center',
