@@ -46,7 +46,7 @@
     "react-native-vector-icons": "^10.0.2",
     "rn-actions-floating-button": "^1.0.9",
     "rn-keyboard-avoiding-view": "^1.0.5",
-    "rn-reactive-text-input": "^1.0.6",
+    "rn-reactive-text-input": "^1.0.7",
     "rn-sliding-popup": "^1.1.2",
     "rn-splash-effect": "^1.0.4",
     "rn-swipe-actions-button": "^1.0.5",

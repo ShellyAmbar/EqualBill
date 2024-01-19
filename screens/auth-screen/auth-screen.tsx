@@ -11,6 +11,8 @@ import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import { GlobalColors } from '@equalbill/styles/global-colors';
 import Button from '@equalbill/components/controllers/button/button';
 import { useRef, useState } from 'react';
+import { BlurView } from 'expo-blur';
+import Styles from './auth-screen.styles';
 
 const AuthScreen = ({ route }) => {
   const [isLogin, setIsLogin] = useState(route?.params?.isLoggin ? route?.params?.isLoggin : false);
@@ -25,144 +27,113 @@ const AuthScreen = ({ route }) => {
   const attemptInvisibleVerification = false;
 
   return (
-    <Box style={{ padding: 20, marginTop: 50 }}>
+    <Box style={{ flex: 1 }}>
+      <Box style={Styles.background}>
+        {[...Array(20).keys()].map(i => (
+          <Box key={`box-${i}`} style={[Styles.box, i % 2 === 1 ? Styles.boxOdd : Styles.boxEven]} />
+        ))}
+      </Box>
       <FirebaseRecaptchaVerifierModal ref={recaptchaVerifier} firebaseConfig={app.options} attemptInvisibleVerification={false} />
-      {<TextFactory type="h1">{isLogin ? 'Login' : 'Signup'}</TextFactory>}
-      {!isLogin && (
-        <>
-          <Spacer size={36} />
+      <BlurView intensity={120} style={Styles.blurContainer}>
+        <Box>
+          {
+            <TextFactory style={Styles.title} type="h1">
+              {isLogin ? 'Login' : 'Signup'}
+            </TextFactory>
+          }
+          {!isLogin && (
+            <>
+              <Spacer size={36} />
+              <ReactiveTextInput
+                placeholderTextColor={'#FFFF'}
+                textInputStyle={Styles.textInputStyle}
+                placeholder="Enter your full name"
+                label="Your full name"
+                lableStyle={Styles.lableStyle}
+                defaultValue={''}
+                textContentType="name"
+                onEndEditing={e => {
+                  setUserName(e.nativeEvent.text);
+                }}
+                autoFocus
+                autoComplete="tel"
+                keyboardType="email-address"
+              />
+            </>
+          )}
+
+          <Spacer size={16} />
           <ReactiveTextInput
             placeholderTextColor={'#FFFF'}
-            textInputStyle={{
-              paddingVertical: 5,
-              backgroundColor: 'transparent',
-              borderColor: '#FFFF',
-              borderRightWidth: 0,
-              borderLeftWidth: 0,
-              borderTopWidth: 0,
-              borderBottomWidth: 1,
-              color: '#FFFF',
-            }}
-            placeholder="Enter your full name"
-            label="Your full name"
-            lableStyle={{ color: GlobalColors.Brand.primary }}
+            textInputStyle={Styles.textInputStyle}
+            placeholder="Enter your phone number"
+            label="Phone number"
+            lableStyle={Styles.lableStyle}
             defaultValue={''}
-            textContentType="name"
+            textContentType="telephoneNumber"
             onEndEditing={e => {
-              setUserName(e.nativeEvent.text);
+              setPhoneNumber(e.nativeEvent.text);
             }}
             autoFocus
             autoComplete="tel"
             keyboardType="phone-pad"
           />
-        </>
-      )}
+          <Spacer size={16} />
 
-      <Spacer size={16} />
-      <ReactiveTextInput
-        placeholderTextColor={'#FFFF'}
-        textInputStyle={{
-          paddingVertical: 5,
-          backgroundColor: 'transparent',
-          borderColor: '#FFFF',
-          borderRightWidth: 0,
-          borderLeftWidth: 0,
-          borderTopWidth: 0,
-          borderBottomWidth: 1,
-          color: '#FFFF',
-        }}
-        placeholder="Enter your phone number"
-        label="Phone number"
-        lableStyle={{ color: GlobalColors.Brand.primary }}
-        defaultValue={''}
-        textContentType="telephoneNumber"
-        onEndEditing={e => {
-          setPhoneNumber(e.nativeEvent.text);
-        }}
-        autoFocus
-        autoComplete="tel"
-        keyboardType="phone-pad"
-      />
-      <Spacer size={16} />
+          <Button
+            buttonStyle={Styles.buttonStyle}
+            lableStyle={{ color: GlobalColors.Brand.primary }}
+            label="Send Verification Code"
+            disabled={!phoneNumber}
+            onPress={async () => {
+              try {
+                const phoneProvider = new PhoneAuthProvider(auth);
+                const verificationId = await phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current);
+                setVerificationId(verificationId);
+                showMessage({
+                  text: 'Verification code has been sent to your phone.',
+                });
+              } catch (err) {
+                showMessage({ text: `Error: ${err.message}`, color: 'red' });
+              }
+            }}
+          />
+          <Spacer size={16} />
+          <ReactiveTextInput
+            placeholderTextColor={'#FFFF'}
+            textInputStyle={Styles.textInputStyle}
+            label="Verification code"
+            lableStyle={Styles.lableStyle}
+            defaultValue={'Enter your verification code'}
+            textContentType="telephoneNumber"
+            onEndEditing={e => {
+              setVerificationCode(e.nativeEvent.text);
+            }}
+            autoFocus
+            autoComplete="tel"
+            keyboardType="phone-pad"
+            editable={!!verificationId}
+            placeholder=""
+          />
+          <Spacer size={16} />
 
-      <Button
-        buttonStyle={{
-          width: '100%',
-          paddingVertical: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: 1,
-          borderRadius: 30,
-          borderColor: GlobalColors.Brand.primary,
-          alignSelf: 'center',
-        }}
-        lableStyle={{ color: GlobalColors.Brand.primary }}
-        label="Send Verification Code"
-        disabled={!phoneNumber}
-        onPress={async () => {
-          try {
-            const phoneProvider = new PhoneAuthProvider(auth);
-            const verificationId = await phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current);
-            setVerificationId(verificationId);
-            showMessage({
-              text: 'Verification code has been sent to your phone.',
-            });
-          } catch (err) {
-            showMessage({ text: `Error: ${err.message}`, color: 'red' });
-          }
-        }}
-      />
-      <Spacer size={16} />
-      <ReactiveTextInput
-        placeholderTextColor={'#FFFF'}
-        textInputStyle={{
-          paddingVertical: 5,
-          backgroundColor: 'transparent',
-          borderColor: '#FFFF',
-          borderRightWidth: 0,
-          borderLeftWidth: 0,
-          borderTopWidth: 0,
-          borderBottomWidth: 1,
-        }}
-        label="Verification code"
-        lableStyle={{ color: GlobalColors.Brand.primary }}
-        defaultValue={''}
-        textContentType="telephoneNumber"
-        onEndEditing={e => {
-          setVerificationCode(e.nativeEvent.text);
-        }}
-        autoFocus
-        autoComplete="tel"
-        keyboardType="phone-pad"
-        editable={!!verificationId}
-        placeholder=""
-      />
-      <Spacer size={16} />
-
-      <Button
-        buttonStyle={{
-          width: '100%',
-          paddingVertical: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: 1,
-          borderRadius: 30,
-          borderColor: GlobalColors.Brand.primary,
-          alignSelf: 'center',
-        }}
-        lableStyle={{ color: GlobalColors.Brand.primary }}
-        label="Confirm Verification Code"
-        disabled={!verificationId}
-        onPress={async () => {
-          try {
-            const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
-            await signInWithCredential(auth, credential);
-            showMessage({ text: 'Phone authentication successful 👍' });
-          } catch (err) {
-            showMessage({ text: `Error: ${err.message}`, color: 'red' });
-          }
-        }}
-      />
+          <Button
+            buttonStyle={Styles.buttonStyle}
+            lableStyle={{ color: GlobalColors.Brand.primary }}
+            label="Confirm Verification Code"
+            disabled={!verificationId}
+            onPress={async () => {
+              try {
+                const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
+                await signInWithCredential(auth, credential);
+                showMessage({ text: 'Phone authentication successful 👍' });
+              } catch (err) {
+                showMessage({ text: `Error: ${err.message}`, color: 'red' });
+              }
+            }}
+          />
+        </Box>
+      </BlurView>
       {/* {message ? (
         <TouchableOpacity
           style={[StyleSheet.absoluteFill, { backgroundColor: 0xffffffee, justifyContent: 'center' }]}
