@@ -10,10 +10,10 @@ export default StyleSheet.create({
     paddingVertical: 12,
   },
   disabledButton: {
-    borderColor: GlobalColors.BgColors.Bg5,
+    borderColor: GlobalColors.TextColors.secondary,
   },
   disabledText: {
-    color: GlobalColors.BgColors.Bg5,
+    color: GlobalColors.TextColors.secondary,
   },
   text: {
     color: 'black',

@@ -57,5 +57,21 @@ export default StyleSheet.create({
     borderColor: GlobalColors.Brand.primary,
     alignSelf: 'center',
   },
-  lableStyle: { color: GlobalColors.Brand.secondary, fontSize: 16, marginBottom: 0, paddingHorizontal: 0 },
+  lableStyle: {
+    color: GlobalColors.TextColors.white,
+    fontSize: 14,
+    marginBottom: 0,
+    paddingHorizontal: 0,
+  },
+  shadow: {
+    shadowColor: '#FFFF',
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 3.0,
+
+    elevation: 10,
+  },
 });

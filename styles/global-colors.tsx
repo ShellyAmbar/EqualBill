@@ -4,7 +4,7 @@ export const GlobalColors = {
     secondary: 'rgb(122, 0, 153)',
     thierd: 'rgb(255, 51, 153)',
     fourth: 'rgb(204, 0, 255)',
-    Gradient: ['#9B0BF9', '#F74094'],
+    fifth: '#00008B',
   },
   BgColors: {
     Bg1: '#FFFFFF',
@@ -19,6 +19,7 @@ export const GlobalColors = {
   TextColors: {
     primary: '#000',
     secondary: '#919399',
+    thierd: '#F5E7FF',
     white: '#FFFFFF',
   },
   IconsColors: {

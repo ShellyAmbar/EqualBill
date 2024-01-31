@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from 'expo-firebase-recaptcha';
-import { initializeApp, getApp } from 'firebase/app';
-import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+
+import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { app, auth } from '@equalbill/firebaseConfig';
 import { Box } from '@equalbill/components/controllers/box/box';
 import TextFactory from '@equalbill/components/factories/text-factory/text-factory';
@@ -13,6 +13,8 @@ import Button from '@equalbill/components/controllers/button/button';
 import { useRef, useState } from 'react';
 import { BlurView } from 'expo-blur';
 import Styles from './auth-screen.styles';
+import { Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const AuthScreen = ({ route }) => {
   const [isLogin, setIsLogin] = useState(route?.params?.isLoggin ? route?.params?.isLoggin : false);
@@ -29,12 +31,19 @@ const AuthScreen = ({ route }) => {
   return (
     <Box style={{ flex: 1 }}>
       <Box style={Styles.background}>
-        {[...Array(20).keys()].map(i => (
+        {/* {[...Array(20).keys()].map(i => (
           <Box key={`box-${i}`} style={[Styles.box, i % 2 === 1 ? Styles.boxOdd : Styles.boxEven]} />
-        ))}
+        ))} */}
+        <LinearGradient
+          colors={[GlobalColors.Brand.fifth, GlobalColors.BgColors.Bg8, GlobalColors.Brand.thierd]}
+          style={Styles.background}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          locations={[0, 0.5, 1]}
+        />
       </Box>
       <FirebaseRecaptchaVerifierModal ref={recaptchaVerifier} firebaseConfig={app.options} attemptInvisibleVerification={false} />
-      <BlurView intensity={120} style={Styles.blurContainer}>
+      <BlurView intensity={40} style={Styles.blurContainer}>
         <Box>
           {
             <TextFactory style={Styles.title} type="h1">
@@ -44,8 +53,9 @@ const AuthScreen = ({ route }) => {
           {!isLogin && (
             <>
               <Spacer size={36} />
+
               <ReactiveTextInput
-                placeholderTextColor={'#FFFF'}
+                placeholderTextColor={GlobalColors.TextColors.thierd}
                 textInputStyle={Styles.textInputStyle}
                 placeholder="Enter your full name"
                 label="Your full name"
@@ -64,7 +74,7 @@ const AuthScreen = ({ route }) => {
 
           <Spacer size={16} />
           <ReactiveTextInput
-            placeholderTextColor={'#FFFF'}
+            placeholderTextColor={GlobalColors.TextColors.thierd}
             textInputStyle={Styles.textInputStyle}
             placeholder="Enter your phone number"
             label="Phone number"
@@ -100,11 +110,11 @@ const AuthScreen = ({ route }) => {
           />
           <Spacer size={16} />
           <ReactiveTextInput
-            placeholderTextColor={'#FFFF'}
+            placeholderTextColor={GlobalColors.TextColors.thierd}
             textInputStyle={Styles.textInputStyle}
             label="Verification code"
             lableStyle={Styles.lableStyle}
-            defaultValue={'Enter your verification code'}
+            placeholder={'Enter your verification code'}
             textContentType="telephoneNumber"
             onEndEditing={e => {
               setVerificationCode(e.nativeEvent.text);
@@ -113,7 +123,6 @@ const AuthScreen = ({ route }) => {
             autoComplete="tel"
             keyboardType="phone-pad"
             editable={!!verificationId}
-            placeholder=""
           />
           <Spacer size={16} />
 
