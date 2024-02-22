@@ -17,6 +17,12 @@ export default StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 20,
   },
+  centerHorizontal: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   background: {
     flex: 1,
     flexWrap: 'wrap',
@@ -47,6 +53,12 @@ export default StyleSheet.create({
     paddingHorizontal: 0,
     borderRadius: 0,
   },
+  absoluteButtons: {
+    position: 'absolute',
+    bottom: 30,
+    width: '100%',
+    paddingHorizontal: 30,
+  },
   buttonStyle: {
     width: '100%',
     paddingVertical: 10,
@@ -54,7 +66,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 30,
-    borderColor: GlobalColors.Brand.primary,
+    borderColor: GlobalColors.TextColors.white,
     alignSelf: 'center',
   },
   lableStyle: {
