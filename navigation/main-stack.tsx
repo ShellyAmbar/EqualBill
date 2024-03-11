@@ -7,6 +7,7 @@ import IntroductionScreen from '@equalbill/screens/introduction-screen/introduct
 import GroupScreen from '@equalbill/screens/group-screen/group-screen';
 import GroupGenerator from '@equalbill/screens/group-generator/group-generator';
 import GroupsScreen from '@equalbill/screens/groups-screen/groups-screen';
+import LandingScreen from '@equalbill/screens/landing-screen/landing-screen';
 
 const MainStack = () => {
   const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ const MainStack = () => {
       <Stack.Screen name="Group" component={GroupScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Groups" component={GroupsScreen} options={{ headerShown: false }} />
       <Stack.Screen name="GroupGenerator" component={GroupGenerator} options={{ headerShown: false }} />
+      <Stack.Screen name="LandingScreen" component={LandingScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

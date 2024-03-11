@@ -1,14 +1,14 @@
+import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
-import { STEP } from './interfaces';
 
 const useAuthScreen = () => {
-  const [currentStep, setcurrentStep] = useState(STEP.LANDING);
+  const isFocused = useIsFocused();
   const videoRef = useRef(null);
   useEffect(() => {
     videoRef.current?.playAsync();
-  }, []);
+  }, [isFocused]);
 
-  return { currentStep, videoRef };
+  return { videoRef, isFocused };
 };
 
 export default useAuthScreen;

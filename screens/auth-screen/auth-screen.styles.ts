@@ -11,9 +11,12 @@ export default StyleSheet.create({
   blurContainer: {
     flex: 1,
     padding: 20,
-    margin: 16,
+
+    marginTop: 80,
+    marginBottom: 30,
+    marginHorizontal: 10,
     textAlign: 'center',
-    justifyContent: 'center',
+    //  justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 20,
   },
@@ -28,18 +31,16 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     ...StyleSheet.absoluteFill,
   },
-  box: {
-    width: '25%',
-    height: '20%',
-  },
-  boxEven: {
-    backgroundColor: GlobalColors.Brand.primary,
-  },
-  boxOdd: {
-    backgroundColor: GlobalColors.BgColors.Bg2,
-  },
+
   title: {
-    color: '#FFF',
+    color: GlobalColors.TextColors.white,
+    fontSize: 30,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+
+    paddingVertical: 20,
   },
   textInputStyle: {
     paddingVertical: 5,
@@ -55,7 +56,7 @@ export default StyleSheet.create({
   },
   absoluteButtons: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 80,
     width: '100%',
     paddingHorizontal: 30,
   },

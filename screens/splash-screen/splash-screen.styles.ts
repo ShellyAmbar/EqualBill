@@ -6,12 +6,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: GlobalColors.Brand.primary,
-  },
-  lottie: {
-    width: '100%',
-    height: 400,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: GlobalColors.BgColors.Bg8,
   },
 });

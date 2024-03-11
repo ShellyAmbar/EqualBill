@@ -6,7 +6,7 @@ import { Box } from '../box/box';
 
 const Button = ({ label, lableStyle, onPress, disabled = false, ...props }: ButtonProps) => {
   return (
-    <Box onPress={() => !disabled && onPress} style={{ ...Styles.button, ...props.buttonStyle, ...(disabled && Styles.disabledButton) }} {...props}>
+    <Box onPress={() => !disabled && onPress()} style={{ ...Styles.button, ...props.buttonStyle, ...(disabled && Styles.disabledButton) }} {...props}>
       <Text style={{ ...Styles.text, ...lableStyle, ...(disabled && Styles.disabledText) }}>{label}</Text>
     </Box>
   );
