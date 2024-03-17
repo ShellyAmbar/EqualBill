@@ -10,7 +10,7 @@ export default StyleSheet.create({
 
   title: {
     color: GlobalColors.TextColors.white,
-    fontSize: 40,
+    fontSize: 50,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',

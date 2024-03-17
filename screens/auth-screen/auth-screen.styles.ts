@@ -26,6 +26,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  horizontal: {
+    width: '100%',
+    flexDirection: 'row',
+
+    alignItems: 'center',
+  },
   background: {
     flex: 1,
     flexWrap: 'wrap',

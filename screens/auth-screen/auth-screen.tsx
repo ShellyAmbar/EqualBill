@@ -18,10 +18,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import useAuthScreen from './hooks/useAuthScreen';
 import { TouchableOpacity } from 'react-native';
 import Left from '@equalbill/assets/images/direction-left-white.svg';
+import CountryCodePicker from 'rn-country-code-picker-modal';
 const AuthScreen = ({ route, navigation }) => {
   const [isLogin, setIsLogin] = useState(route?.params?.isLoggin ? route?.params?.isLoggin : false);
   const recaptchaVerifier = useRef(null);
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationId, setVerificationId] = useState();
   const [verificationCode, setVerificationCode] = useState();
 
@@ -75,20 +76,31 @@ const AuthScreen = ({ route, navigation }) => {
               <Spacer size={16} />
             </>
           )}
-          <ReactiveTextInput
-            placeholderTextColor={GlobalColors.TextColors.thierd}
-            textInputStyle={Styles.textInputStyle}
-            placeholder="Enter your phone number"
-            label="Phone number"
-            lableStyle={Styles.lableStyle}
-            defaultValue={''}
-            textContentType="telephoneNumber"
-            onEndEditing={e => {
-              setPhoneNumber(e.nativeEvent.text);
-            }}
-            autoComplete="tel"
-            keyboardType="phone-pad"
-          />
+          <Box style={Styles.horizontal}>
+            <CountryCodePicker
+              onPickedCode={code => {
+                setPhoneNumber(code);
+              }}
+            />
+            <Spacer size={16} isVertical={false} />
+            <ReactiveTextInput
+              placeholderTextColor={GlobalColors.TextColors.thierd}
+              textInputStyle={Styles.textInputStyle}
+              placeholder="Enter your phone number"
+              label="Phone number"
+              lableStyle={Styles.lableStyle}
+              defaultValue={''}
+              value={phoneNumber}
+              onChangeText={t => setPhoneNumber(t)}
+              textContentType="telephoneNumber"
+              onEndEditing={e => {
+                setPhoneNumber(e.nativeEvent.text);
+              }}
+              autoComplete="tel"
+              keyboardType="phone-pad"
+            />
+          </Box>
+
           <Spacer size={16} />
 
           <Button
