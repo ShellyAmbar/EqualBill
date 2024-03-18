@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const useLandingScreen = ({ navigation }) => {
   const videoRef = useRef(null);
-  useEffect(() => {
-    videoRef.current?.playAsync();
-  }, []);
 
   useEffect(() => {
-    videoRef.current?.playAsync();
+    const unsubscribe = navigation.addListener('focus', () => {
+      videoRef.current?.playAsync();
+    });
+
+    return unsubscribe;
   }, [navigation]);
 
   return { videoRef };

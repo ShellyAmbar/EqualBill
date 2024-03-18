@@ -87,7 +87,7 @@ const AuthScreen = ({ route, navigation }) => {
               placeholderTextColor={GlobalColors.TextColors.thierd}
               textInputStyle={Styles.textInputStyle}
               placeholder="Enter your phone number"
-              label="Phone number"
+              label=""
               lableStyle={Styles.lableStyle}
               defaultValue={''}
               value={phoneNumber}

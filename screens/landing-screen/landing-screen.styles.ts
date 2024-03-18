@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors } from '../../styles/global-colors';
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: GlobalColors.BgColors.Bg8,
+  },
   centerHorizontal: {
     width: '100%',
     flexDirection: 'row',
@@ -15,9 +19,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    top: 150,
+    top: 160,
     backgroundColor: GlobalColors.BgColors.Bg4,
-    paddingVertical: 20,
+    paddingVertical: 60,
   },
 
   absoluteButtons: {
@@ -44,4 +48,6 @@ export default StyleSheet.create({
     right: 0,
     left: 0,
   },
+  bottomBorderTextBtn: { color: GlobalColors.TextColors.white, borderColor: '#FFF', borderBottomWidth: 1 },
+  text: { color: GlobalColors.TextColors.white },
 });

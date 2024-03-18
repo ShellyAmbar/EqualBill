@@ -14,7 +14,7 @@ const LandingScreen = props => {
   const { videoRef } = useLandingScreen({ navigation: props.navigation });
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={Styles.container}>
       <Video
         ref={videoRef}
         style={Styles.video}
@@ -27,7 +27,7 @@ const LandingScreen = props => {
       <Box style={Styles.absoluteButtons}>
         <Button
           buttonStyle={Styles.buttonStyle}
-          lableStyle={{ color: GlobalColors.TextColors.white }}
+          lableStyle={Styles.text}
           label="Login"
           disabled={false}
           onPress={() => {
@@ -36,14 +36,14 @@ const LandingScreen = props => {
         />
         <Spacer size={20} />
         <Box style={Styles.centerHorizontal}>
-          <TextFactory style={{ color: GlobalColors.TextColors.white }}>{"Don't have an account?"}</TextFactory>
+          <TextFactory style={Styles.text}>{"Don't have an account?"}</TextFactory>
           <Spacer size={12} isVertical={false} />
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Auth', { isLoggin: false });
             }}
           >
-            <TextFactory style={{ color: GlobalColors.TextColors.white }}>{'Sign Up now!'}</TextFactory>
+            <TextFactory style={Styles.bottomBorderTextBtn}>{'Sign Up now!'}</TextFactory>
           </TouchableOpacity>
         </Box>
       </Box>

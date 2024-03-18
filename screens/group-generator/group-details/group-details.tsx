@@ -6,6 +6,7 @@ import ReactiveTextInput from 'rn-reactive-text-input';
 import useGroupDetailes from './hooks/useGroupDetailes';
 import { GroupDetailsProps } from './interfaces';
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
+import { GlobalColors } from '@equalbill/styles/global-colors';
 
 const GroupDetails = forwardRef(({ data, onDataChanged }: GroupDetailsProps, ref) => {
   const { groupDescription, groupName, setGroupName, setGroupDescription } = useGroupDetailes(data);
@@ -19,7 +20,7 @@ const GroupDetails = forwardRef(({ data, onDataChanged }: GroupDetailsProps, ref
     <Box style={Styles.container}>
       <TextFactory>{"What's the name of the group?"}</TextFactory>
       <ReactiveTextInput
-        textInputStyle={{ paddingVertical: 5 }}
+        textInputStyle={Styles.input}
         placeholder="Group name"
         label=""
         defaultValue={groupName}
@@ -31,7 +32,7 @@ const GroupDetails = forwardRef(({ data, onDataChanged }: GroupDetailsProps, ref
       <Spacer size={12} />
       <TextFactory>{"What's the description of the group?"}</TextFactory>
       <ReactiveTextInput
-        textInputStyle={{ paddingVertical: 5 }}
+        textInputStyle={Styles.input}
         placeholder="Group description"
         label=""
         defaultValue={groupDescription}
