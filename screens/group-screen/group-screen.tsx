@@ -21,6 +21,7 @@ import ExpenseForm from './expense-form/expense-form';
 import { Group } from '@equalbill/stores/user/interfaces';
 import { observer } from 'mobx-react';
 import UserStore from '@equalbill/stores/user/user-store';
+import HorizontalTabsSlider from '@equalbill/components/horizontal-tabs-slider/horizontal-tabs-slider';
 
 const GroupScreen = observer(({ route, navigation }) => {
   const { group: groupFromProps }: { group: Group } = route.params;
@@ -115,7 +116,19 @@ const GroupScreen = observer(({ route, navigation }) => {
         )}
       >
         <Box style={styles.container}>
-          <Spacer size={16} />
+          <HorizontalTabsSlider
+            isDeletable={true}
+            isMultySelection={false}
+            dataList={[
+              { index: 0, name: 'expenses', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 1, name: 'debts', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 2, name: 'debts1', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 3, name: 'debts2', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 4, name: 'debts3', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 5, name: 'debts4', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+            ]}
+          />
+
           <TextFactory type="h4" style={styles.subTitle}>
             {'Participents: '}
           </TextFactory>
