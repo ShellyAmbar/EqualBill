@@ -9,6 +9,7 @@ const createStyle = ({ isSelected, isImageView = false, ...props }: TabItemStyle
     container: {
       borderColor: isSelected ? GlobalColors.TextColors.secondary : GlobalColors.Border,
       borderWidth: isImageView ? 0 : 1,
+      padding: isImageView ? 0 : 10,
       borderRadius: 15,
       shadowColor: '#FFFF',
       shadowOffset: {
@@ -22,6 +23,7 @@ const createStyle = ({ isSelected, isImageView = false, ...props }: TabItemStyle
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
+      marginVertical: 15,
     },
     text: {
       ...(i18n.isRTL ? (isSelected ? HebrewStyle.H6 : HebrewStyle.BodyText1) : isSelected ? EnglishStyle.H6 : EnglishStyle.BodyText1),

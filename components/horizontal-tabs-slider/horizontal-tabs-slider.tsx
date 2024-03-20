@@ -1,10 +1,10 @@
 import React from 'react';
-import Styles from './horizontal-tabs-slider.styles';
+import createStyle from './horizontal-tabs-slider.styles';
 import TabItem from './tab-item/tab-item';
 import { HorizontalSliderProps, ListItem } from './interfaces';
 import useHorizontalSlider from './hooks/useHorizontalSlider';
 import { Box } from '../controllers/box/box';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Spacer from '../controllers/spacer/spacer';
 
 const HorizontalTabsSlider = ({
@@ -15,11 +15,12 @@ const HorizontalTabsSlider = ({
   isDeletable = false,
   ...props
 }: HorizontalSliderProps) => {
-  const { listOfData, onSelectItem, scrollRef, selectedItemsIndexs, onDeleteItemFromList } = useHorizontalSlider({
+  const { listOfData, onSelectItem, scrollRef, selectedItemsIndexs, onDeleteItemFromList, viewHeight, setViewHeight } = useHorizontalSlider({
     list: dataList,
     isMultySelection,
   });
 
+  const Styles = createStyle({ height: viewHeight });
   return (
     <FlatList
       data={listOfData}
@@ -33,20 +34,28 @@ const HorizontalTabsSlider = ({
       keyExtractor={item => item.index.toString()}
       ItemSeparatorComponent={() => <Spacer size={16} isVertical={false} />}
       renderItem={({ item, index }) => (
-        <TabItem
-          isDeletable={isDeletable}
-          key={item.index}
-          item={item}
-          onPressDelete={item => {
-            onDeleteItem && onDeleteItem(item);
-            onDeleteItemFromList(item);
+        <View
+          onLayout={e => {
+            if (viewHeight === 0) {
+              setViewHeight(e.nativeEvent.layout.height);
+            }
           }}
-          onPress={item => {
-            onSelectItem(item);
-            onPressItem && onPressItem(item);
-          }}
-          selectedItemsIndexs={selectedItemsIndexs}
-        />
+        >
+          <TabItem
+            isDeletable={isDeletable}
+            key={item.index}
+            item={item}
+            onPressDelete={item => {
+              onDeleteItem && onDeleteItem(item);
+              onDeleteItemFromList(item);
+            }}
+            onPress={item => {
+              onSelectItem(item);
+              onPressItem && onPressItem(item);
+            }}
+            selectedItemsIndexs={selectedItemsIndexs}
+          />
+        </View>
       )}
     />
   );

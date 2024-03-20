@@ -120,7 +120,7 @@ const GroupScreen = observer(({ route, navigation }) => {
             isDeletable={true}
             isMultySelection={false}
             dataList={[
-              { index: 0, name: 'expenses', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 0, name: 'expenses' },
               { index: 1, name: 'debts', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
               { index: 2, name: 'debts1', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
               { index: 3, name: 'debts2', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },

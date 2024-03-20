@@ -5,6 +5,7 @@ import { ListItem } from '../interfaces';
 const useHorizontalSlider = ({ list, isMultySelection, ...props }: UseHorizontalSliderProps) => {
   const [listOfData, setlistOfData] = useState<ListItem[]>([...list]);
   const [selectedItemsIndexs, setSelectedItemsIndexs] = useState([0]);
+  const [viewHeight, setViewHeight] = useState(0);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -44,6 +45,8 @@ const useHorizontalSlider = ({ list, isMultySelection, ...props }: UseHorizontal
     scrollRef,
     selectedItemsIndexs,
     onDeleteItemFromList,
+    viewHeight,
+    setViewHeight,
   };
 };
 

@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
-export default StyleSheet.create({
-  cointainer: {
-    width: '100%',
+const createStyle = ({ height }: { height: number }) =>
+  StyleSheet.create({
+    cointainer: {
+      width: '100%',
 
-    flexGrow: 0,
-    minHeight: 100,
-  },
-  contentCointainer: {
-    alignItems: 'center',
-    paddingHorizontal: 6,
-  },
-});
+      flexGrow: 0,
+      minHeight: height ? height : 100,
+    },
+    contentCointainer: {
+      alignItems: 'center',
+      paddingHorizontal: 6,
+    },
+  });
+export default createStyle;
