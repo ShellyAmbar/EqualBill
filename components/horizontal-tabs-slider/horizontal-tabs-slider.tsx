@@ -13,6 +13,9 @@ const HorizontalTabsSlider = ({
   onPressItem,
   onDeleteItem,
   isDeletable = false,
+  colorSelected,
+  colorUnSelected,
+  textStyle,
   ...props
 }: HorizontalSliderProps) => {
   const { listOfData, onSelectItem, scrollRef, selectedItemsIndexs, onDeleteItemFromList, viewHeight, setViewHeight } = useHorizontalSlider({
@@ -42,6 +45,9 @@ const HorizontalTabsSlider = ({
           }}
         >
           <TabItem
+            colorSelected={colorSelected}
+            colorUnSelected={colorUnSelected}
+            textStyle={textStyle}
             isDeletable={isDeletable}
             key={item.index}
             item={item}

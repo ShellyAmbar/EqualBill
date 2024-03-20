@@ -1,3 +1,5 @@
+import { TextStyle } from 'react-native';
+
 type ListItem = {
   name: string;
   index: number;
@@ -9,6 +11,9 @@ type HorizontalSliderProps = {
   onPressItem?: (item: ListItem) => void;
   onDeleteItem?: (item: ListItem) => void;
   isDeletable: boolean;
+  colorSelected?: string;
+  colorUnSelected?: string;
+  textStyle?: TextStyle;
 };
 
 export { ListItem, HorizontalSliderProps };

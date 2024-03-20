@@ -4,10 +4,10 @@ import { EnglishStyle, HebrewStyle } from '@equalbill/styles/styles';
 import { StyleSheet } from 'react-native';
 import { TabItemStylesProps } from './interfaces';
 
-const createStyle = ({ isSelected, isImageView = false, ...props }: TabItemStylesProps) => {
+const createStyle = ({ isSelected, isImageView = false, colorSelected, colorUnSelected, textStyle, ...props }: TabItemStylesProps) => {
   return StyleSheet.create({
     container: {
-      borderColor: isSelected ? GlobalColors.TextColors.secondary : GlobalColors.Border,
+      borderColor: isSelected ? colorSelected : colorUnSelected,
       borderWidth: isImageView ? 0 : 1,
       padding: isImageView ? 0 : 10,
       borderRadius: 15,
@@ -27,7 +27,8 @@ const createStyle = ({ isSelected, isImageView = false, ...props }: TabItemStyle
     },
     text: {
       ...(i18n.isRTL ? (isSelected ? HebrewStyle.H6 : HebrewStyle.BodyText1) : isSelected ? EnglishStyle.H6 : EnglishStyle.BodyText1),
-      color: isSelected ? GlobalColors.Brand.primary : GlobalColors.Border,
+      color: isSelected ? colorSelected : colorUnSelected,
+      ...{ ...textStyle },
     },
     close: {
       justifyContent: 'center',

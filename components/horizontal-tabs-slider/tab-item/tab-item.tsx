@@ -5,9 +5,25 @@ import TextFactory from '@equalbill/components/factories/text-factory/text-facto
 import { TabItemProps } from './interfaces';
 import CloseIcon from '@equalbill/assets/images/closeIcon.svg';
 
-const TabItem = ({ onPress, item, selectedItemsIndexs, onPressDelete, isDeletable = false, ...props }: TabItemProps) => {
+const TabItem = ({
+  onPress,
+  item,
+  selectedItemsIndexs,
+  onPressDelete,
+  isDeletable = false,
+  colorSelected = '#1E90FF',
+  colorUnSelected = '#D7D9DE',
+  textStyle,
+  ...props
+}: TabItemProps) => {
   const isSelected = selectedItemsIndexs.includes(item.index);
-  const Styles = createStyle({ isSelected: isSelected, isImageView: item.url !== undefined && item.url?.length > 0 });
+  const Styles = createStyle({
+    isSelected: isSelected,
+    isImageView: item.url !== undefined && item.url?.length > 0,
+    colorSelected,
+    colorUnSelected,
+    textStyle,
+  });
 
   return (
     <TouchableOpacity onPress={() => onPress(item)} style={Styles.container}>
