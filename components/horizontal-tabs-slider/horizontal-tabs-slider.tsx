@@ -16,6 +16,7 @@ const HorizontalTabsSlider = ({
   colorSelected,
   colorUnSelected,
   textStyle,
+  itemContainerStyle,
   ...props
 }: HorizontalSliderProps) => {
   const { listOfData, onSelectItem, scrollRef, selectedItemsIndexs, onDeleteItemFromList, viewHeight, setViewHeight } = useHorizontalSlider({
@@ -26,18 +27,20 @@ const HorizontalTabsSlider = ({
   const Styles = createStyle({ height: viewHeight });
   return (
     <FlatList
-      data={listOfData}
-      ref={ref => {
-        scrollRef.current = ref;
-      }}
       horizontal
-      showsHorizontalScrollIndicator={false}
+      showsHorizontalScrollIndicator={true}
       contentContainerStyle={Styles.contentCointainer}
       style={Styles.cointainer}
       keyExtractor={item => item.index.toString()}
       ItemSeparatorComponent={() => <Spacer size={16} isVertical={false} />}
+      {...props}
+      data={listOfData}
+      ref={ref => {
+        scrollRef.current = ref;
+      }}
       renderItem={({ item, index }) => (
         <View
+          key={item.index}
           onLayout={e => {
             if (viewHeight === 0) {
               setViewHeight(e.nativeEvent.layout.height);
@@ -60,6 +63,7 @@ const HorizontalTabsSlider = ({
               onPressItem && onPressItem(item);
             }}
             selectedItemsIndexs={selectedItemsIndexs}
+            containerStyle={itemContainerStyle}
           />
         </View>
       )}

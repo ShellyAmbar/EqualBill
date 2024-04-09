@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { GlobalColors } from '../../styles/global-colors';
+import { GlobalColors } from '../../../styles/global-colors';
 export default StyleSheet.create({
   container: {
     justifyContent: 'center',

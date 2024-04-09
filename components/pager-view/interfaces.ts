@@ -1,0 +1,2 @@
+type PagerViewProps = {};
+export { PagerViewProps };

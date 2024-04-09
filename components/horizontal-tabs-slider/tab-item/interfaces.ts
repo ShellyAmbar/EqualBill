@@ -10,6 +10,7 @@ type TabItemProps = {
   colorSelected?: string;
   colorUnSelected?: string;
   textStyle?: TextStyle;
+  containerStyle?: ViewStyle;
 };
 
 type TabItemStylesProps = {
@@ -18,6 +19,7 @@ type TabItemStylesProps = {
   colorSelected?: string;
   colorUnSelected?: string;
   textStyle?: TextStyle;
+  containerStyle?: ViewStyle;
 };
 
 export { TabItemProps, TabItemStylesProps };

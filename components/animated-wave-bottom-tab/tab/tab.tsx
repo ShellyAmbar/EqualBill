@@ -28,8 +28,7 @@ export const CustomBottomTab: FC<BottomTabBarProps> = ({ state, descriptors, nav
         return 'shopping-bag';
       case 'Activity':
         return 'star';
-      case 'Profile':
-        return 'user';
+
       default:
         return 'home';
     }
@@ -70,6 +69,7 @@ export const CustomBottomTab: FC<BottomTabBarProps> = ({ state, descriptors, nav
           const label = options.tabBarLabel ? options.tabBarLabel : route.name;
           return (
             <TabItem
+              totalTabs={state.routes.length}
               key={index.toString()}
               label={label as string}
               icon={selectIcon(route.name)}

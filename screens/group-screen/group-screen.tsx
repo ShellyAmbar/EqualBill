@@ -22,6 +22,7 @@ import { Group } from '@equalbill/stores/user/interfaces';
 import { observer } from 'mobx-react';
 import UserStore from '@equalbill/stores/user/user-store';
 import HorizontalTabsSlider from '@equalbill/components/horizontal-tabs-slider/horizontal-tabs-slider';
+import PagerView from '@equalbill/components/pager-view/pager-view';
 
 const GroupScreen = observer(({ route, navigation }) => {
   const { group: groupFromProps }: { group: Group } = route.params;
@@ -118,16 +119,21 @@ const GroupScreen = observer(({ route, navigation }) => {
         <Box style={styles.container}>
           <HorizontalTabsSlider
             isDeletable={true}
-            isMultySelection={false}
+            isMultySelection={true}
             dataList={[
-              { index: 0, name: 'expenses' },
-              { index: 1, name: 'debts', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
-              { index: 2, name: 'debts1', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
-              { index: 3, name: 'debts2', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
-              { index: 4, name: 'debts3', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
-              { index: 5, name: 'debts4', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 0, name: 'hgjh' },
+              {
+                index: 1,
+                name: 'hjghjgjhg',
+                url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg',
+              },
+              { index: 2, name: 'gjhgjhg', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 3, name: 'hjghjg' },
+              { index: 4, name: 'hjgh', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
+              { index: 5, name: 'hjghg', url: 'https://images.freeimages.com/365/images/previews/85b/psd-universal-blue-web-user-icon-53242.jpg' },
             ]}
           />
+          <PagerView />
 
           <TextFactory type="h4" style={styles.subTitle}>
             {'Participents: '}

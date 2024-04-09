@@ -13,11 +13,15 @@ export type TabProps = {
   index: number;
   activeIndex: number;
   onTabPress: () => void;
+  totalTabs: number;
 };
-const ICON_SIZE = 25;
-const LABEL_WIDTH = width / 4;
+
 const AnimatedIcon = Animated.createAnimatedComponent(Feather);
-const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress }) => {
+const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress, totalTabs = 4 }) => {
+  const LABEL_WIDTH = width / totalTabs;
+  const ICON_SIZE = width / totalTabs;
+  console.log(ICON_SIZE);
+
   const { curvedPaths } = usePath();
   const animatedActiveIndex = useSharedValue(activeIndex);
   const iconPosition = getPathXCenterByIndex(curvedPaths, index);
