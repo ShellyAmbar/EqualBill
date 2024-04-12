@@ -8,8 +8,8 @@ import AnimatedWaveBottomTab from '../animated-wave-bottom-tab/animated-wave-bot
 const Drawer = (props: DrawerProps) => {
   const DrawerNav = createDrawerNavigator();
   return (
-    <DrawerNav.Navigator screenOptions={{ headerShown: false }}>
-      <DrawerNav.Screen name="home" component={AnimatedWaveBottomTab} />
+    <DrawerNav.Navigator screenOptions={{ headerShown: true }}>
+      <DrawerNav.Screen name="home" options={{}} component={AnimatedWaveBottomTab} />
       <DrawerNav.Screen name="Profile" component={ProfileScreen} />
       <DrawerNav.Screen name="Settings" component={SettingsScreen} />
     </DrawerNav.Navigator>

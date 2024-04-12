@@ -1,28 +1,70 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import CustomBottomTab from './tab/tab';
+//import TabBar from './tab-bar/tab-bar';
 import HomeScreen from '@equalbill/screens/home-screen/home-screen';
 import InsitesScreen from '@equalbill/screens/Insites-screen/Insites-screen';
 import ActivityScreen from '@equalbill/screens/activity-screen/activity-screen';
 import useDrawerHeader from '../drawer/hooks/useDrawerHeader';
 import ProfileScreen from '@equalbill/screens/drawer-screens/profile-screen/profile-screen';
+import { Text, View } from 'react-native';
+import TabBar from 'rn-animated-wave-bottom-navigation';
 
 const Tab = createBottomTabNavigator();
+
+const Screen1 = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Page 1</Text>
+    </View>
+  );
+};
+const Screen2 = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Page 2</Text>
+    </View>
+  );
+};
+const Screen3 = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Page 3</Text>
+    </View>
+  );
+};
+const Screen4 = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Page 4</Text>
+    </View>
+  );
+};
+const Screen5 = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Page 5</Text>
+    </View>
+  );
+};
 
 const AnimatedWaveBottomTab = () => {
   const {} = useDrawerHeader();
   return (
-    <Tab.Navigator initialRouteName="Home" tabBar={props => <CustomBottomTab {...props} />}>
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBar={props => <TabBar {...props} numOfTabs={5} icons={['home', 'shopping-bag', 'star', 'star', 'star']} />}
+    >
       <Tab.Group
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Tab.Screen options={{ tabBarLabel: 'Home' }} name="Home" component={HomeScreen} />
-        <Tab.Screen options={{ tabBarLabel: 'Insites' }} name="Insites" component={InsitesScreen} />
-        <Tab.Screen options={{ tabBarLabel: 'Activity' }} name="Activity" component={ActivityScreen} />
-        {/* <Tab.Screen options={{ tabBarLabel: 'profile' }} name="Profile" component={ProfileScreen} /> */}
+        <Tab.Screen options={{ tabBarLabel: 'Screen1' }} name="Screen1" component={Screen1} />
+        <Tab.Screen options={{ tabBarLabel: 'Screen2' }} name="Screen2" component={Screen2} />
+        <Tab.Screen options={{ tabBarLabel: 'Screen3' }} name="Screen3" component={Screen3} />
+        <Tab.Screen options={{ tabBarLabel: 'Screen4' }} name="Screen4" component={Screen4} />
+        <Tab.Screen options={{ tabBarLabel: 'Screen5' }} name="Screen5" component={Screen5} />
       </Tab.Group>
     </Tab.Navigator>
   );

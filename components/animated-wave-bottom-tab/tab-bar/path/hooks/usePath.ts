@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { curveBasis, line } from 'd3-shape';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { parse } from 'react-native-redash';
-import { width } from '@equalbill/styles/styles';
+import { Dimensions } from 'react-native';
 
-type GenerateTabShapePath = (position: number, adjustedHeight: number) => string;
+type GenerateTabShapePath = (position: number, adjustedHeight: number, numTabs: number) => string;
 
-const NUM_TABS = 4;
 const SCALE = 0.7;
 const TAB_BAR_HEIGHT = 64;
 
-const generateTabShapePath: GenerateTabShapePath = (position, adjustedHeight) => {
-  const adjustedWidth = width / NUM_TABS;
+const generateTabShapePath: GenerateTabShapePath = (position, adjustedHeight, numTabs) => {
+  const { width } = Dimensions.get('screen');
+  const adjustedWidth = width / numTabs;
   const tabX = adjustedWidth * position;
 
   const lineGenerator = line().curve(curveBasis);
@@ -29,7 +29,8 @@ const generateTabShapePath: GenerateTabShapePath = (position, adjustedHeight) =>
   return `${tab}`;
 };
 
-const usePath = () => {
+const usePath = ({ numTabs = 3 }: { numTabs: number }) => {
+  const { width } = Dimensions.get('screen');
   const insets = useSafeAreaInsets();
   const tHeight = TAB_BAR_HEIGHT + insets.bottom;
   const adjustedHeight = tHeight - insets.bottom;
@@ -39,8 +40,8 @@ const usePath = () => {
   }, [tHeight]);
 
   const curvedPaths = useMemo(() => {
-    return Array.from({ length: NUM_TABS }, (_, index) => {
-      const tabShapePath = generateTabShapePath(index + 0.5, adjustedHeight);
+    return Array.from({ length: numTabs }, (_, index) => {
+      const tabShapePath = generateTabShapePath(index + 0.5, adjustedHeight, numTabs);
       return parse(`${tabShapePath}`);
     });
   }, [adjustedHeight]);

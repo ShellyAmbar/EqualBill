@@ -1,11 +1,10 @@
-import { Pressable, Text } from 'react-native';
+import { Dimensions, Pressable, Text, TextStyle } from 'react-native';
 import React, { FC, useEffect } from 'react';
 import Animated, { useAnimatedProps, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import Feather from 'react-native-vector-icons/Feather';
-import { getPathXCenterByIndex } from '../path/path';
-import usePath from '../path/hooks/usePath';
-import { width } from '@equalbill/styles/styles';
-import styles from './tab-item.styles';
+import { getPathXCenterByIndex } from './../path/path';
+import usePath from './../path/hooks/usePath';
+import createStyle from './tab-item.styles';
 
 export type TabProps = {
   label: string;
@@ -14,26 +13,39 @@ export type TabProps = {
   activeIndex: number;
   onTabPress: () => void;
   totalTabs: number;
+  lableStyle?: TextStyle;
+  iconUnActiveColor?: string;
+  iconActiveColor?: string;
 };
 
 const AnimatedIcon = Animated.createAnimatedComponent(Feather);
-const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress, totalTabs = 4 }) => {
+const TabItem: FC<TabProps> = ({
+  label,
+  icon,
+  index,
+  activeIndex,
+  onTabPress,
+  totalTabs = 3,
+  lableStyle,
+  iconActiveColor = '#FFFF',
+  iconUnActiveColor = 'rgba(128,128,128,0.8)',
+}) => {
+  const Styles = createStyle({ numOfItems: totalTabs });
+  const { width } = Dimensions.get('screen');
   const LABEL_WIDTH = width / totalTabs;
   const ICON_SIZE = width / totalTabs;
-  console.log(ICON_SIZE);
 
-  const { curvedPaths } = usePath();
+  const { curvedPaths } = usePath({ numTabs: totalTabs });
   const animatedActiveIndex = useSharedValue(activeIndex);
-  const iconPosition = getPathXCenterByIndex(curvedPaths, index);
   const labelPosition = getPathXCenterByIndex(curvedPaths, index);
 
   const tabStyle = useAnimatedStyle(() => {
     const translateY = animatedActiveIndex.value - 1 === index ? -20 : 20;
-    const iconPositionX = iconPosition - index * ICON_SIZE;
+
     return {
       width: ICON_SIZE,
       height: ICON_SIZE,
-      transform: [{ translateY: withTiming(translateY) }, { translateX: iconPositionX - ICON_SIZE / 2 }],
+      transform: [{ translateY: withTiming(translateY) }],
     };
   });
   const labelContainerStyle = useAnimatedStyle(() => {
@@ -42,15 +54,15 @@ const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress, to
       transform: [{ translateY: withTiming(translateY) }, { translateX: labelPosition - LABEL_WIDTH / 2 }],
     };
   });
-  const iconColor = useSharedValue(activeIndex === index + 1 ? 'white' : 'rgba(128,128,128,0.8)');
+  const iconColor = useSharedValue(activeIndex === index + 1 ? iconActiveColor : iconUnActiveColor);
 
   //Adjust Icon color for this first render
   useEffect(() => {
     animatedActiveIndex.value = activeIndex;
     if (activeIndex === index + 1) {
-      iconColor.value = withTiming('white');
+      iconColor.value = withTiming(iconActiveColor);
     } else {
-      iconColor.value = withTiming('rgba(128,128,128,0.8)');
+      iconColor.value = withTiming(iconUnActiveColor);
     }
   }, [activeIndex]);
 
@@ -59,7 +71,7 @@ const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress, to
   }));
   return (
     <>
-      <Animated.View style={[tabStyle]}>
+      <Animated.View style={[tabStyle, { alignItems: 'center' }]}>
         <Pressable
           testID={`tab${label}`}
           //Increasing touchable Area
@@ -69,8 +81,8 @@ const TabItem: FC<TabProps> = ({ label, icon, index, activeIndex, onTabPress, to
           <AnimatedIcon name={icon} size={25} animatedProps={animatedIconProps} />
         </Pressable>
       </Animated.View>
-      <Animated.View style={[labelContainerStyle, styles.labelContainer]}>
-        <Text style={styles.label}>{label}</Text>
+      <Animated.View style={[labelContainerStyle, Styles.labelContainer]}>
+        <Text style={[Styles.label, { ...lableStyle }]}>{label}</Text>
       </Animated.View>
     </>
   );

@@ -17,9 +17,12 @@ const MainStack = () => {
       <Stack.Screen name="Introduction" component={IntroductionScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Group" component={GroupScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Groups" component={GroupsScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="GroupGenerator" component={GroupGenerator} options={{ headerShown: false }} />
+      <Stack.Group screenOptions={{ headerShown: false, presentation: 'modal' }}>
+        <Stack.Screen name="Group" component={GroupScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Groups" component={GroupsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="GroupGenerator" component={GroupGenerator} options={{ headerShown: false }} />
+      </Stack.Group>
+
       <Stack.Screen name="LandingScreen" component={LandingScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
