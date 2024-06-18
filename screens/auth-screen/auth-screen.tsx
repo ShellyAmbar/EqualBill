@@ -35,7 +35,7 @@ const AuthScreen = ({ route, navigation }) => {
   const [message, showMessage] = useState('');
   const [userName, setUserName] = useState('');
   const attemptInvisibleVerification = false;
-  const {} = useAuthScreen();
+  const { currentStep, numOfSteps } = useAuthScreen();
 
   return (
     <Box style={{ flex: 1 }}>
