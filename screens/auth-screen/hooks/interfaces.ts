@@ -1,5 +1,4 @@
 const enum STEP {
-  LANDING,
   FULLNAME,
   PHONE,
   CODE,

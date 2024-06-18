@@ -4,7 +4,7 @@ import styles from './introduction-screen.styles';
 import useIntroductionScreen from './hooks/useIntroductionScreen';
 import IntroductionItem from './introduction-item/introduction-item';
 import { Box } from '@equalbill/components/controllers/box/box';
-import PaginationIndicator from './pagination-indicator/pagination-indicator';
+import PaginationIndicator from 'react-native-pagination-indicator';
 import Spacer from '@equalbill/components/controllers/spacer/spacer';
 import { width } from '@equalbill/styles/styles';
 import ButtonProgressNext from './button-progress-next/button-progress-next';

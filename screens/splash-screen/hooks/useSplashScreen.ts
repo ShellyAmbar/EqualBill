@@ -12,7 +12,9 @@ const useSplashScreen = ({ navigation }: { navigation: any }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       // navigation.navigate('LandingScreen');
-      navigation.navigate('Main');
+      // navigation.navigate('Main');
+      // navigation.navigate('Introduction');
+      navigation.navigate('Auth');
     }, 1500);
     return () => clearTimeout(timeout);
   }, [isFontsLoaded]);
